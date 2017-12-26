@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<android.support.v7.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="@dimen/default_padding">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/bestTitle"
+        android:padding="@dimen/default_padding"
+        android:textColor="#000"
+        android:textSize="15sp"
+        android:textStyle="bold"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#e1e1e1"/>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_padding"
+        android:padding="@dimen/default_padding_border"
+        app:cardCornerRadius="@dimen/default_padding"
+        android:elevation="@dimen/default_padding"
+        android:id="@+id/cvItemBoardThumbnail">
+
+        <android.support.v7.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/default_padding_border">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvTitle"
+                android:padding="@dimen/default_padding"
+                android:textColor="#000"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:ellipsize="marquee"
+                tools:text = "전안법. 18살 "/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvContent"
+                android:padding="@dimen/default_padding"
+                android:textColor="#111111"
+                android:textSize="13sp"
+                tools:text="해외사이트 를 기반으로 한 무분별한 일반인 모욕 사진 유포\n처벌해주세요 "/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvId"
+                android:padding="@dimen/default_padding"
+                android:textColor="#111111"
+                android:textSize="13sp"
+                tools:text="참여인원 1000명"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvCount"
+                android:padding="@dimen/default_padding"
+                android:textColor="#FF599fff"
+                android:textSize="13sp"
+                tools:text="참여인원 1000명"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvDateAmount"
+                android:textColor="#eeeeee"
+                android:textSize="13sp" />
+
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnShowDetail"
+                android:padding="@dimen/default_padding"
+                android:background="#FF599fff"
+                android:text="내용 자세히 보기"
+                android:textColor="#fff"
+                android:textSize="13sp"/>
+
+        </android.support.v7.widget.LinearLayoutCompat>
+
+
+    </android.support.v7.widget.CardView>
+
+</android.support.v7.widget.LinearLayoutCompat>
