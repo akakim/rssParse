@@ -24,6 +24,7 @@
             android:layout_gravity="center_vertical"
             android:textSize="15sp"
             android:padding="@dimen/default_padding"
+            android:id="@+id/tvContent"
             tools:text="데이터 로딩중입니다."/>
 
 

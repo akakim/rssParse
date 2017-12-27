@@ -1,5 +1,7 @@
 package com.akakim.bluehousereaderapp.ui;
 
+import android.os.Bundle;
+
 import com.akakim.bluehousereaderapp.data.BoardData;
 
 import org.json.JSONObject;
@@ -16,7 +18,7 @@ public interface MainBoardCallback {
     void onResumeRefresh();
     void showProgress(String message);
     void responseFailed(String result);
-    void responseSuccess(JSONObject responseData);
+    void responseSuccess(Bundle responseData);
 
     void showMessage(String msg);
     void showAlert();

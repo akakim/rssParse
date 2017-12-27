@@ -1,5 +1,6 @@
 package com.akakim.bluehousereaderapp.ui;
 
+import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.akakim.bluehousereaderapp.data.BoardData;
@@ -39,7 +40,7 @@ public class MainBoardPresenterImpl implements MainBoardPresenter,ParseMainBoard
     }
 
     @Override
-    public void onFinished(boolean isError,String result, JSONObject responseData ) {
+    public void onFinished(boolean isError,String result, Bundle responseData ) {
 
         if( isError ){
             mainBoardCallback.responseFailed(result);

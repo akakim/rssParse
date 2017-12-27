@@ -6,5 +6,10 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
+    <string name="main_navigation_drawer_open">메뉴닫기 </string>
+    <string name="main_navigation_drawer_close">메뉴열기</string>
+
+
+
     <string name="action_settings">Settings</string>
 </resources>

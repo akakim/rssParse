@@ -1,5 +1,6 @@
 package com.akakim.bluehousereaderapp.parse;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 
@@ -16,8 +17,10 @@ import org.json.JSONObject;
 
 public interface ParseMainBoardInteractor {
 
+
+
     interface OnFinishedListener{
-        void onFinished(final boolean isError, String result, JSONObject responseData);
+        void onFinished(final boolean isError, String result, Bundle responseData);
     }
 
     void init(AppCompatActivity activity);

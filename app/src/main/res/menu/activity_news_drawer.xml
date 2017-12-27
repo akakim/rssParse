@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+
+    <item android:title="뉴스 가판대"/>
+    <group android:checkableBehavior="single"
+        android:id="@+id/menuNewsCategory">
+
+        <item
+            android:id="@+id/navDefault"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="청와대 청원게시판"/>
+
+    </group>
+
+
+
+
+</menu>

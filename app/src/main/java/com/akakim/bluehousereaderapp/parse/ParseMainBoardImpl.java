@@ -1,5 +1,6 @@
 package com.akakim.bluehousereaderapp.parse;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 
@@ -31,17 +32,22 @@ public class ParseMainBoardImpl implements ParseMainBoardInteractor {
     Runnable fullBoardTask;
     Runnable dashBoardTask;
 
+    public static final String BEST_CONTENT_TITLE_KEY= "bestContentTitle";
+//    public static final String BEST_CONTENT_
+
+    public static final String BOARD_ITEM_KEY = "item";
+
     public ParseMainBoardImpl(OnFinishedListener onFinishedListener){
         this.onFinishedListener =onFinishedListener;
 
         fullBoardTask = () -> {
             final StringBuilder builder = new StringBuilder();
 
-            final JSONObject jsonObject = new JSONObject();
+            final Bundle jsonObject = new Bundle();
             try{
 
                 Connection connection = Jsoup.connect(Constants.PUBLIC_OPINION_BASE_URL);
-                connection.timeout(5000);
+                connection.timeout(6000);
                 Document doc = connection.get();
                 Elements classDivs = doc.select("div[class]");
 
@@ -53,6 +59,8 @@ public class ParseMainBoardImpl implements ParseMainBoardInteractor {
                     switch (ele.attr("class")){
                         case "cspb_info text":
 
+
+//                            jsonObject.putStringArrayList("ss");
                             builder.append("title " + ele.select("h5").text());
                             builder.append("title " + ele.select("p").text());
                             break;
