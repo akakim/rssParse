@@ -15,10 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/bestTitle"
-        android:padding="@dimen/default_padding"
-        android:textColor="#000"
-        android:textSize="15sp"
-        android:textStyle="bold"/>
+        style="@style/TextTitleBlackTheme"/>
 
     <View
         android:layout_width="match_parent"
@@ -43,59 +40,45 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/tvTitle"
+                android:id="@+id/tvBestOpinionTitle"
                 android:padding="@dimen/default_padding"
-                android:textColor="#000"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                android:ellipsize="marquee"
+                style="@style/TextTitleBlackTheme"
                 tools:text = "전안법. 18살 "/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/tvContent"
-                android:padding="@dimen/default_padding"
-                android:textColor="#111111"
-                android:textSize="13sp"
-                tools:text="해외사이트 를 기반으로 한 무분별한 일반인 모욕 사진 유포\n처벌해주세요 "/>
+                android:id="@+id/tvBestOpinionContent"
+                style="@style/TextBlackTheme"
+                tools:text="해외사이트를 기반으로 한 무분별한 일반인 모욕 사진 유포\n처벌해주세요 "/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/tvId"
-                android:padding="@dimen/default_padding"
-                android:textColor="#111111"
-                android:textSize="13sp"
+                android:id="@+id/tvBestOpinionId"
+                style="@style/TextBlackTheme"
                 tools:text="참여인원 1000명"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/tvCount"
-                android:padding="@dimen/default_padding"
-                android:textColor="#FF599fff"
-                android:textSize="13sp"
+                android:id="@+id/tvBestOpinionCount"
+                style="@style/TextLightBlueTheme"
                 tools:text="참여인원 1000명"
                 />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/tvDateAmount"
-                android:textColor="#eeeeee"
-                android:textSize="13sp" />
+                android:id="@+id/tvBestOpinionDateAmount"
+                style="@style/TextBlackTheme" />
 
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/btnShowDetail"
-                android:padding="@dimen/default_padding"
-                android:background="#FF599fff"
-                android:text="내용 자세히 보기"
-                android:textColor="#fff"
-                android:textSize="13sp"/>
+                style="@style/ButtonLightBlueTheme"/>
 
         </android.support.v7.widget.LinearLayoutCompat>
 

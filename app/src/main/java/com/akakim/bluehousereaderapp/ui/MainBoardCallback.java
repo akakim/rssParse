@@ -20,6 +20,9 @@ public interface MainBoardCallback {
     void responseFailed(String result);
     void responseSuccess(Bundle responseData);
 
+    void setUI(Runnable runnable);
+
+
     void showMessage(String msg);
     void showAlert();
 

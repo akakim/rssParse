@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvBoardIdx"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        style="@style/TextBlackTheme"
+        tools:text="754444"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvCategory"
+        android:layout_toRightOf="@id/tvBoardIdx"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        style="@style/TextLightBlueTheme"
+        tools:text="인권/성평등"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvTitle"
+        android:layout_below="@id/tvBoardIdx"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        style="@style/TextBlackTheme" />
+
+    <TextView
+        android:layout_width="w"
+        android:layout_height="" />
+</RelativeLayout>

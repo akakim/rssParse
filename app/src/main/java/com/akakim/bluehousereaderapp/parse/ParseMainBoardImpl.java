@@ -3,12 +3,12 @@ package com.akakim.bluehousereaderapp.parse;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.akakim.bluehousereaderapp.MainJavaActivity;
 import com.akakim.bluehousereaderapp.data.BoardData;
 import com.akakim.bluehousereaderapp.data.Constants;
 
-import org.json.JSONObject;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -17,6 +17,7 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.nio.charset.MalformedInputException;
+import java.util.ArrayList;
 
 /**
  * @author KIM
@@ -32,18 +33,19 @@ public class ParseMainBoardImpl implements ParseMainBoardInteractor {
     Runnable fullBoardTask;
     Runnable dashBoardTask;
 
-    public static final String BEST_CONTENT_TITLE_KEY= "bestContentTitle";
-//    public static final String BEST_CONTENT_
 
-    public static final String BOARD_ITEM_KEY = "item";
+
 
     public ParseMainBoardImpl(OnFinishedListener onFinishedListener){
         this.onFinishedListener =onFinishedListener;
 
         fullBoardTask = () -> {
+            boolean isBestBoardExist = false;
+            boolean isReadyAnswerExist = false;
             final StringBuilder builder = new StringBuilder();
 
-            final Bundle jsonObject = new Bundle();
+            final Bundle bundles = new Bundle();
+            ArrayList<BoardData> boardDataArrayList = new ArrayList<BoardData>();
             try{
 
                 Connection connection = Jsoup.connect(Constants.PUBLIC_OPINION_BASE_URL);
@@ -60,9 +62,40 @@ public class ParseMainBoardImpl implements ParseMainBoardInteractor {
                         case "cspb_info text":
 
 
-//                            jsonObject.putStringArrayList("ss");
+                            BoardData bestBoard = new BoardData();
+
+
+                            bestBoard.setBoardTag(BoardData.BEST_BOARD_TAG);
+                            bestBoard.setTitle( ele.select("h5").text());
+                            bestBoard.setThumbnailContent( ele.select("p").text() );
+
+                            int k = 0;
+                            for ( Element aElement : ele.select("span")){
+                                Log.d(getClass().getSimpleName(),"k - " + k + " : " + aElement.text() );
+
+
+                                switch ( k ){
+                                    case 0 :
+                                        bestBoard.setAuthor( aElement.text() );
+                                        break;
+                                    case 1:
+                                        bestBoard.setNumberOfJoinPeople( aElement.text());
+                                        break;
+                                    case 2:
+                                        bestBoard.setTerm( aElement.text());
+                                        break;
+                                }
+
+                                k++;
+
+                            }
+
+                            Elements linkEle = ele.select("a[href]");
+                            bestBoard.setLink(linkEle.attr("href"));
+                            boardDataArrayList.add( bestBoard);
                             builder.append("title " + ele.select("h5").text());
                             builder.append("title " + ele.select("p").text());
+                            isBestBoardExist = true;
                             break;
                         case "":
                             break;
@@ -71,20 +104,25 @@ public class ParseMainBoardImpl implements ParseMainBoardInteractor {
                     }
                 }
 
-                onFinishedListener.onFinished(false, builder.toString(), jsonObject);
+                bundles.putBoolean(BoardData.BEST_BOARD_TAG,isBestBoardExist );
+                bundles.putBoolean(BoardData.READY_ANSWER_BOARD_TAG,isReadyAnswerExist );
+                bundles.putParcelableArrayList(BoardData.BOARD_ITEMS_KEY,boardDataArrayList);
+
+//                ArrayList<BoardData> test
+                onFinishedListener.onFinished(false, builder.toString(), bundles);
             } catch (MalformedInputException e){
                 builder.append("MalformedInputException : " + e.getMessage());
 
                 e.printStackTrace();
-                onFinishedListener.onFinished(true,builder.toString(),jsonObject);
+                onFinishedListener.onFinished(true,builder.toString(),bundles);
             } catch (IOException e ){
                 builder.append("IOException : " + e.getMessage());
                 e.printStackTrace();
-                onFinishedListener.onFinished(true,builder.toString(),jsonObject);
+                onFinishedListener.onFinished(true,builder.toString(),bundles);
             }catch (Exception e){
                 builder.append("Exception : " + e.getMessage());
                 e.printStackTrace();
-                onFinishedListener.onFinished(true,builder.toString(),jsonObject);
+                onFinishedListener.onFinished(true,builder.toString(),bundles);
             }
         };
     }
