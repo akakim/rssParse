@@ -42,10 +42,14 @@ public class MainBoardPresenterImpl implements MainBoardPresenter,ParseMainBoard
     @Override
     public void onFinished(boolean isError,String result, Bundle responseData ) {
 
+        Runnable failRunnable = ()-> { mainBoardCallback.responseFailed(result);  };
+        Runnable successRunnable = ()-> { mainBoardCallback.responseSuccess( responseData );};
+
+
         if( isError ){
-            mainBoardCallback.responseFailed(result);
+            mainBoardCallback.setUI( failRunnable );
         }else {
-            mainBoardCallback.responseSuccess(responseData);
+            mainBoardCallback.setUI( successRunnable );
         }
     }
 }

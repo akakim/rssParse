@@ -8,8 +8,7 @@
     android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.akakim.bluehousereaderapp.MainJavaActivity"
-    >
+    tools:context="com.akakim.bluehousereaderapp.MainJavaActivity">
         <android.support.design.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -46,7 +45,7 @@
                         <android.support.v7.widget.RecyclerView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:id="@+id/boardList">
+                            android:id="@+id/rvBoardList">
 
                         </android.support.v7.widget.RecyclerView>
                 </android.support.v7.widget.LinearLayoutCompat>
@@ -64,6 +63,5 @@
         app:menu="@menu/activity_news_drawer">
 
     </android.support.design.widget.NavigationView>
-
 
 </android.support.v4.widget.DrawerLayout>

@@ -1,5 +1,8 @@
 package com.akakim.bluehousereaderapp.data;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * @author KIM
  * @version 0.0.1
@@ -7,15 +10,70 @@ package com.akakim.bluehousereaderapp.data;
  * @since 0.0.1
  */
 
-public class BoardData {
+public class BoardData implements Parcelable{
 
+
+    public static final String BEST_BOARD_TAG = "bestBoardItem";
+    public static final String BOARD_ITEMS_KEY = "boardItems";
+    public static final String READY_ANSWER_BOARD_TAG = "arriveBoardItem";
+    public static final String NORMAL_BOARD_TAG = "normalBoardItem";
+
+    String boardTag;
     String numberOfContent;         // 0 인경우는 베스트 청원임.
-    String category;
-    String title;
-    String author;
-    String term;
-    String numberOfJoinPeople;
-    String link;
+    String boardIdx;                // 게시판 순서
+    String category;                // 게시판 종류
+    String title;                   // 게시판 제목
+    String author;                  // 저자
+    String term;                    // 청원 기간
+    String numberOfJoinPeople;      // 청원에 참여한 인원
+    String link;                    // 게시판 링크
+
+    String thumbnailContent;
+
+    public BoardData(){
+        boardIdx="";
+        this.boardTag ="";
+        this.numberOfContent ="";
+        this.category="";
+        this.title="";
+        this.author="";
+        this. term="";
+        this. numberOfJoinPeople="";
+        this. link="";
+        this.thumbnailContent="";
+    }
+    protected BoardData(Parcel in) {
+        boardTag = in.readString();
+        numberOfContent = in.readString();
+        boardIdx = in.readString();
+        category = in.readString();
+        title = in.readString();
+        author = in.readString();
+        term = in.readString();
+        numberOfJoinPeople = in.readString();
+        link = in.readString();
+        thumbnailContent = in.readString();
+    }
+
+    public static final Creator<BoardData> CREATOR = new Creator<BoardData>() {
+        @Override
+        public BoardData createFromParcel(Parcel in) {
+            return new BoardData(in);
+        }
+
+        @Override
+        public BoardData[] newArray(int size) {
+            return new BoardData[size];
+        }
+    };
+
+    public String getBoardTag() {
+        return boardTag;
+    }
+
+    public void setBoardTag(String boardTag) {
+        this.boardTag = boardTag;
+    }
 
     public String getNumberOfContent() {
         return numberOfContent;
@@ -73,4 +131,39 @@ public class BoardData {
         this.link = link;
     }
 
+
+    public String getThumbnailContent() {
+        return thumbnailContent;
+    }
+
+    public void setThumbnailContent(String thumbnailContent) {
+        this.thumbnailContent = thumbnailContent;
+    }
+
+    public String getBoardIdx() {
+        return boardIdx;
+    }
+
+    public void setBoardIdx(String boardIdx) {
+        this.boardIdx = boardIdx;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(boardTag);
+        dest.writeString(numberOfContent);
+        dest.writeString(boardIdx);
+        dest.writeString(category);
+        dest.writeString(title);
+        dest.writeString(author);
+        dest.writeString(term);
+        dest.writeString(numberOfJoinPeople);
+        dest.writeString(link);
+        dest.writeString(thumbnailContent);
+    }
 }
