@@ -10,6 +10,8 @@
     <string name="main_navigation_drawer_close">메뉴열기</string>
 
 
-
     <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

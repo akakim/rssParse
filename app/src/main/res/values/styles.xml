@@ -16,7 +16,7 @@
     <style name="TextCommonTheme">
 
         <item name="android:ellipsize">marquee</item>
-        <item name="android:padding">@dimen/default_padding</item>
+        <item name="android:padding">8dp</item>
     </style>
 
     <style name="TextTitleBlackTheme" parent="TextCommonTheme">
@@ -41,9 +41,9 @@
 
         <item name="android:textSize">13sp</item>
         <item name="android:textColor">#fff</item>
-        <item name="android:background">FF599fff</item>
+        <item name="android:background">#FF599fff</item>
         <item name="android:ellipsize">marquee</item>
-        <item name="android:padding">@dimen/default_padding</item>
+        <item name="android:padding">7dp</item>
 
     </style>
 </resources>

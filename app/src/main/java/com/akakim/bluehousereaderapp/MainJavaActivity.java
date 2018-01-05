@@ -5,7 +5,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutCompat;
@@ -48,7 +50,7 @@ public class MainJavaActivity extends BaseActivity implements MainBoardCallback,
 //    @BindView(R.id.cvItemBoardThumbnail)
 //    TextView cvItemBoardThumbnail;
 
-    @BindViews(R.id.blueHouseHeader)
+    @BindView(R.id.blueHouseHeader)
     LinearLayoutCompat blueHouseHeader;
 
     @BindViews({
@@ -62,9 +64,17 @@ public class MainJavaActivity extends BaseActivity implements MainBoardCallback,
 
     Uri bestLink;
 
-    @BindView( R.id.rvBoardList)
-    RecyclerView rvBoardList;
+//    @BindView( R.id.rvBoardList)
+//    RecyclerView rvBoardList;
 
+    @BindView(R.id.tabLayout)
+    TabLayout tabLayout;
+
+    @BindView(R.id.viewPager)
+    ViewPager viewPager;
+
+    @BindView(R.id.tvErrorMessage)
+    TextView tvErrorMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +101,7 @@ public class MainJavaActivity extends BaseActivity implements MainBoardCallback,
         mainBoardCallback.initContent();
 
 
-        rvBoardList.setLayoutManager( new LinearLayoutManager(this));
+//        rvBoardList.setLayoutManager( new LinearLayoutManager(this));
 
     }
 
@@ -166,11 +176,7 @@ public class MainJavaActivity extends BaseActivity implements MainBoardCallback,
         for(BoardData item : boardItems){
             switch ( item.getBoardTag() ){
                 case BoardData.BEST_BOARD_TAG:
-
-
                     bestOpinionList.get(0).setText( item.getTitle() );
-
-
                     bestOpinionList.get(1).setText( item.getThumbnailContent() );
                     bestOpinionList.get(2).setText( "청원인 : " + item.getAuthor() );
                     bestOpinionList.get(3).setText( "신청인 : " + item.getNumberOfJoinPeople() );
@@ -211,5 +217,9 @@ public class MainJavaActivity extends BaseActivity implements MainBoardCallback,
 
         drawerLayout.closeDrawer(GravityCompat.START);
         return false;
+    }
+
+    @OnClick(R.id.tvErrorMessage)
+    public void refreshBoard(){
     }
 }

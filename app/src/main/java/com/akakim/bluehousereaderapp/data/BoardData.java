@@ -166,4 +166,17 @@ public class BoardData implements Parcelable{
         dest.writeString(link);
         dest.writeString(thumbnailContent);
     }
+
+    @Override
+    public String toString() {
+       return   "[boardIdx] : " + boardIdx
+              + "[boardTag]"+ boardTag
+               + "[numberOfContent]"+ numberOfContent
+               + "[title]"+ title
+               + "[author]"+ author
+               + "[term]"+ term
+               + "[numberOfJoinPeople]"+ numberOfJoinPeople
+               + "[link]"+ link
+               + "[thumbnailContent]"+ thumbnailContent               ;
+    }
 }
