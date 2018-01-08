@@ -105,7 +105,7 @@ public class BlueHouseTask implements Runnable  {
                             Elements ulTag = ele.select("ul");
 
                             Elements liTags = ulTag.select("li");
-
+                            BoardData boardData;
                             for( Element e : liTags){
 
 //                                Log.d("getElementTAg,",e.text());
@@ -115,7 +115,7 @@ public class BlueHouseTask implements Runnable  {
 
 //                                Log.d( "links TAg ",links.text() );
 
-                                BoardData boardData = new BoardData();
+                                boardData = new BoardData();
                                 boardData.setBoardTag( BoardData.NORMAL_BOARD_TAG );
 
                                 for( Element divItem : wrap_ele){
@@ -140,12 +140,11 @@ public class BlueHouseTask implements Runnable  {
                                         }else if ( divItem.hasClass("bl_agree  cb ")){
                                             boardData.setNumberOfJoinPeople(  divItem.text() );
                                         }
-
 //                                    Log.d( "element TAg ",divItem.text() );
 
                                 }
 
-
+                                boardDataArrayList.add(boardData);
 //                                Log.d("tag,",boardData.toString());
 
 
@@ -161,6 +160,10 @@ public class BlueHouseTask implements Runnable  {
                 }
             }
 
+
+            for ( BoardData data : boardDataArrayList){
+                Log.d(getClass().getSimpleName(),data.toString());
+            }
             bundles.putBoolean(BoardData.BEST_BOARD_TAG,isBestBoardExist );
             bundles.putBoolean(BoardData.READY_ANSWER_BOARD_TAG,isReadyAnswerExist );
             bundles.putParcelableArrayList(BoardData.BOARD_ITEMS_KEY,boardDataArrayList);
