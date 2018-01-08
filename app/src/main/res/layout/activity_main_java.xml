@@ -39,10 +39,13 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                        <include
-                            layout="@layout/item_board_thumbnail"/>
 
 
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/btnTest"
+                        android:text="test activity"/>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="300dp"
@@ -50,26 +53,13 @@
                         android:text="게시판 글을 불러오는 데 실패하였습니다."
                         android:visibility="gone"
                         />
-                    <android.support.design.widget.TabLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:minHeight="?attr/actionBarSize"
-                        android:background="@color/colorPrimary"
-                        android:id="@+id/tabLayout">
 
-                    </android.support.design.widget.TabLayout>
-                    <android.support.v4.view.ViewPager
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:id="@+id/viewPager">
+                        <android.support.v7.widget.RecyclerView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/rvBoardList">
 
-                    </android.support.v4.view.ViewPager>
-                        <!--<android.support.v7.widget.RecyclerView-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:id="@+id/rvBoardList">-->
-
-                        <!--</android.support.v7.widget.RecyclerView>-->
+                        </android.support.v7.widget.RecyclerView>
                 </android.support.v7.widget.LinearLayoutCompat>
 
             </android.support.v4.widget.NestedScrollView>

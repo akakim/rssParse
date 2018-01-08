@@ -1,5 +1,7 @@
 package com.akakim.bluehousereaderapp.ui;
 
+import com.akakim.bluehousereaderapp.parse.ParseMainBoardInteractor;
+
 /**
  * @author KIM
  * @version 0.0.1
@@ -9,4 +11,5 @@ package com.akakim.bluehousereaderapp.ui;
 
 public interface MainBoardPresenter {
     void initContent();
+    void initContent(@ParseMainBoardInteractor.BoardDefinition int def);
 }

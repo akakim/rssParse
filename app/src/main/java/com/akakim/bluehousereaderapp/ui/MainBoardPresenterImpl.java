@@ -40,6 +40,14 @@ public class MainBoardPresenterImpl implements MainBoardPresenter,ParseMainBoard
     }
 
     @Override
+    public void initContent(@ParseMainBoardInteractor.BoardDefinition int def) {
+
+        mainBoardCallback.showMessage("데이터 로딩중");
+        parseMainBoard.loadBoard( def );
+
+    }
+
+    @Override
     public void onFinished(boolean isError,String result, Bundle responseData ) {
 
         Runnable failRunnable = ()-> { mainBoardCallback.responseFailed(result);  };

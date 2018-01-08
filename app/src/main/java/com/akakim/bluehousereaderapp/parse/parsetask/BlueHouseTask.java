@@ -17,6 +17,10 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.nio.charset.MalformedInputException;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Set;
+
+import kotlin.coroutines.experimental.CoroutineContext;
 
 /**
  * Created by RyoRyeong Kim on 2018-01-05.
@@ -24,7 +28,7 @@ import java.util.ArrayList;
 
 public class BlueHouseTask implements Runnable  {
 
-    ParseMainBoardInteractor.OnFinishedListener onFinishedListener;
+    ParseMainBoardInteractor.OnFinishedListener onFinishedListener  ;
 
     public BlueHouseTask(ParseMainBoardInteractor.OnFinishedListener onFinishedListener) {
         this.onFinishedListener = onFinishedListener;
@@ -92,49 +96,67 @@ public class BlueHouseTask implements Runnable  {
 
                         if("답변 대기 중인 청원".equals( ele.select("h4").text())) {
                             Log.d(getClass().getSimpleName(),"답변 대기 중은 결정안됨 ");
+                            Log.d(getClass().getSimpleName(),ele.text());
                             break;
                         }else if("청원 목록".equals( ele.select("h4").text())){
+                            Log.d(getClass().getSimpleName(),"청원목록  ");
+                            Log.d(getClass().getSimpleName(),ele.text());
 
-                            Elements boarItems = ele.select("div[class]");
+                            Elements ulTag = ele.select("ul");
+
+                            Elements liTags = ulTag.select("li");
+
+                            for( Element e : liTags){
+
+//                                Log.d("getElementTAg,",e.text());
+                                Elements wrap_ele = e.select("div[class]");
+
+//                                Elements links = wrap_ele.select("a[href]");
+
+//                                Log.d( "links TAg ",links.text() );
+
+                                BoardData boardData = new BoardData();
+                                boardData.setBoardTag( BoardData.NORMAL_BOARD_TAG );
+
+                                for( Element divItem : wrap_ele){
 
 
-                            ArrayList<BoardData> middleDatas = new ArrayList<>();
+//                                    Log.d("getClassName",divItem.className());
+//                                    Log.d("getText()",divItem.text());
 
-                            BoardData boardData = new BoardData();
+                                        if( divItem.hasClass("bl_no")){
+                                            boardData.setNumberOfContent(  divItem.text() );
+                                        }else if ( divItem.hasClass("bl_category cs") ){
+                                            boardData.setCategory(  divItem.text() );
+                                        }else if ( divItem.hasClass("bl_subject")){
 
-                            for( Element boardItem : boarItems ){
+                                            // link 를 얻기위함 . class 에 걸려서 다행
+                                            Elements linkEles =  divItem.getElementsByClass("cb");
+                                            boardData.setThumbnailContent(  divItem.text() );
+                                            boardData.setLink(  linkEles.attr("href"));
 
-                                Elements numberEles = boardItem.getElementsByClass("bl_no");
+                                        }else if ( divItem.hasClass("bl_date light")){
+                                            boardData.setTerm(  divItem.text() );
+                                        }else if ( divItem.hasClass("bl_agree  cb ")){
+                                            boardData.setNumberOfJoinPeople(  divItem.text() );
+                                        }
 
+//                                    Log.d( "element TAg ",divItem.text() );
 
-                                Elements categoryEles = boardItem.getElementsByClass("bl_category cs");
-                                Elements titleEles = boardItem.getElementsByClass("bl_category cs");
-                                Elements termEles = boardItem.getElementsByClass("bl_category cs");
-                                Elements peopleEles = boardItem.getElementsByClass("bl_category cs");
-
-
-
-                                boardData.setBoardTag( BoardData.BOARD_ITEMS_KEY);
-                                boardData.setBoardIdx( numberEles.text());
-                                boardData.setCategory( categoryEles.text());
-                                boardData.setTitle( titleEles.text());
-                                boardData.setTerm( termEles.text());
-                                boardData.setNumberOfJoinPeople( peopleEles.text());
-
-                                if( BuildConfig.DEBUG ) {
-                                    Log.d(getClass().getSimpleName(), "신규 생성된 Data " + boardData.toString());
                                 }
-                                boardDataArrayList.add(boardData);
+
+
+//                                Log.d("tag,",boardData.toString());
+
+
                             }
 
                         } else {
                             Log.e(getClass().getSimpleName(),"알 수 없는 에러 발생 in board_text");
                         }
-//                        BoardData commonRecord
-
                         break;
                     default:
-                        Log.e(getClass().getSimpleName(),"알 수 없는 에러 발생 in default switch");
+//                        Log.e(getClass().getSimpleName(),"알 수 없는 에러 발생 in default switch");
                         break;
                 }
             }

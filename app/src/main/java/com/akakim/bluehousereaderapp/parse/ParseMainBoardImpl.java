@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.akakim.bluehousereaderapp.MainJavaActivity;
 import com.akakim.bluehousereaderapp.parse.parsetask.BlueHouseTask;
+import com.akakim.bluehousereaderapp.ui.activity.*;
 
 
 /**
@@ -26,11 +27,28 @@ public class ParseMainBoardImpl implements ParseMainBoardInteractor {
     public void init(AppCompatActivity activity) {
         if (activity == null){
             return;
-        }else if( activity instanceof MainJavaActivity ){
+        }else if ( activity instanceof BlueHouseContentActivity){
             Thread t = new Thread( new BlueHouseTask(onFinishedListener) );
             t.start();
-        }else {
+        }
+        else {
             Log.e(getClass().getSimpleName(),"error undefinded");
+        }
+    }
+
+    @Override
+    public void loadBoard(@BoardDefinition int boardKind) {
+
+        Thread t;
+        switch (boardKind){
+            case ParseMainBoardInteractor.BLUE_HOUSE_INIT_BOARD:
+                t = new Thread( new BlueHouseTask(onFinishedListener) );
+                t.start();
+                break;
+            case ParseMainBoardInteractor.BLUE_HOUSE_RECOMAND_MAIN:
+                t = new Thread( new BlueHouseTask(onFinishedListener) );
+                t.start();
+                break;
         }
     }
 

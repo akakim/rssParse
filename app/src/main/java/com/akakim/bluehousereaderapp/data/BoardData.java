@@ -171,6 +171,7 @@ public class BoardData implements Parcelable{
     public String toString() {
        return   "[boardIdx] : " + boardIdx
               + "[boardTag]"+ boardTag
+              + "[category]"+ category
                + "[numberOfContent]"+ numberOfContent
                + "[title]"+ title
                + "[author]"+ author
