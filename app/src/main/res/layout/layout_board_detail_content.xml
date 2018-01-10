@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        android:id="@+id/appBarLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!--<android.support.v7.widget.Toolbar-->
+            <!--android:id="@+id/toolbar"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="?attr/actionBarSize"-->
+            <!--android:background="?attr/colorPrimary"-->
+            <!--app:popupTheme="@style/AppTheme.PopupOverlay"-->
+            <!--app:title="지구의 자전"-->
+            <!--app:navigationIcon="@drawable/left_arrow"-->
+            <!--app:contentInsetRight="@drawable/left_arrow"/>-->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/left_arrow"
+                android:id="@+id/navigationBar"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_edit"
+                android:layout_alignParentRight="true"
+                android:id="@+id/iconEdit"/>
+
+
+        </RelativeLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/default_padding">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:text="Mark your Calander for SRM 727,January 10 , 2017 at 21:00 UTC-5"
+            android:textSize="20sp"
+            android:id="@+id/title"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#e1e1e1"
+            android:layout_below="@id/title"
+            android:id="@+id/divider">
+
+        </View>
+
+        <ImageView
+            android:layout_width="@dimen/default_profile_icon_size"
+            android:layout_height="@dimen/default_profile_icon_size"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/sample_images"
+            android:layout_below="@id/divider"
+            android:id="@+id/profileImage"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:text="Topcoder Team"
+            android:layout_below="@id/divider"
+            android:layout_toRightOf="@id/profileImage"
+            android:padding="@dimen/default_padding"
+            android:id="@+id/tvAuthor"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:text="1월 9일 오후 10:00"
+            android:layout_below="@id/tvAuthor"
+            android:layout_toRightOf="@id/profileImage"
+            android:paddingLeft="@dimen/default_padding"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/profileImage"
+            android:text="hey. top coder team marked your calendar for SRM 727 january 10 , 2017 at 21:00 \n this is utc time rememeberd."
+            />
+    </RelativeLayout>
+
+</android.support.v7.widget.LinearLayoutCompat>

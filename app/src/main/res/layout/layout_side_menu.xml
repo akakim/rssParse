@@ -1,9 +1,370 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.LinearLayoutCompat
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <android.support.v7.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        android:id="@+id/appBarLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:navigationIcon="@drawable/default_hamburger_menu"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:title="Android 게시판"/>
+
+    </android.support.design.widget.AppBarLayout>
+
+
+        <android.support.v7.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_item_size"
+            android:orientation="horizontal"
+            android:padding="@dimen/default_padding">
+
+            <ImageView
+                android:layout_width="@dimen/default_profile_icon_size"
+                android:layout_height="@dimen/default_profile_icon_size"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/sample_images" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="@dimen/default_padding"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TopCoderTeam"
+                        android:textColor="#a1a1a1"
+                        android:layout_weight="0.7"/>
+
+                    <TextView
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:text="1월 9일"
+                        android:textColor="#a1a1a1"
+                        android:gravity="right"
+                        android:layout_weight="0.3"/>
+                </LinearLayout>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Mark your calaendar for SRm 828, .. "
+                        android:textColor="#a1a1a1"
+                        android:textSize="12sp"
+                        />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="캘린더 내용 blur blur ..... "
+                    android:textColor="#a1a1a1"
+                    android:textSize="12sp"
+                    />
+            </LinearLayout>
+
+        </android.support.v7.widget.LinearLayoutCompat>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#e1e1e1"/>
+        <android.support.v7.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_item_size"
+            android:orientation="horizontal"
+            android:padding="@dimen/default_padding">
+
+            <ImageView
+                android:layout_width="@dimen/default_profile_icon_size"
+                android:layout_height="@dimen/default_profile_icon_size"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/sample_images" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="@dimen/default_padding"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TopCoderTeam"
+                        android:textColor="#a1a1a1"
+                        android:layout_weight="0.7"/>
+
+                    <TextView
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:text="1월 9일"
+                        android:textColor="#a1a1a1"
+                        android:gravity="right"
+                        android:layout_weight="0.3"/>
+                </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Mark your calaendar for SRm 828, .. "
+                    android:textColor="#a1a1a1"
+                    android:textSize="12sp"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="캘린더 내용 blur blur ..... "
+                    android:textColor="#a1a1a1"
+                    android:textSize="12sp"
+                    />
+            </LinearLayout>
+
+        </android.support.v7.widget.LinearLayoutCompat>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#e1e1e1"/>
+        <android.support.v7.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_item_size"
+            android:orientation="horizontal"
+            android:padding="@dimen/default_padding">
+
+            <ImageView
+                android:layout_width="@dimen/default_profile_icon_size"
+                android:layout_height="@dimen/default_profile_icon_size"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/sample_images" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="@dimen/default_padding"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TopCoderTeam"
+                        android:textColor="#a1a1a1"
+                        android:layout_weight="0.7"/>
+
+                    <TextView
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:text="1월 9일"
+                        android:textColor="#a1a1a1"
+                        android:gravity="right"
+                        android:layout_weight="0.3"/>
+                </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Mark your calaendar for SRm 828, .. "
+                    android:textColor="#a1a1a1"
+                    android:textSize="12sp"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="캘린더 내용 blur blur ..... "
+                    android:textColor="#a1a1a1"
+                    android:textSize="12sp"
+                    />
+            </LinearLayout>
+
+        </android.support.v7.widget.LinearLayoutCompat>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#e1e1e1"/>
+        <android.support.v7.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_item_size">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/default_item_size"
+                android:layout_gravity="center_vertical"
+                android:background="#e44e4e"
+                android:text="삭제 됩니다."
+                android:textColor="#fff"
+                android:gravity="center_vertical"
+                android:padding="@dimen/default_padding"/>
+
+        </android.support.v7.widget.LinearLayoutCompat>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#e1e1e1"/>
+        <android.support.v7.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_item_size"
+            android:orientation="horizontal"
+            android:padding="@dimen/default_padding">
+
+            <ImageView
+                android:layout_width="@dimen/default_profile_icon_size"
+                android:layout_height="@dimen/default_profile_icon_size"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/sample_images" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="@dimen/default_padding"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TopCoderTeam"
+                        android:textColor="#a1a1a1"
+                        android:layout_weight="0.7"/>
+
+                    <TextView
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:text="1월 9일"
+                        android:textColor="#a1a1a1"
+                        android:gravity="right"
+                        android:layout_weight="0.3"/>
+                </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Mark your calaendar for SRm 828, .. "
+                    android:textColor="#a1a1a1"
+                    android:textSize="12sp"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="캘린더 내용 blur blur ..... "
+                    android:textColor="#a1a1a1"
+                    android:textSize="12sp"
+                    />
+            </LinearLayout>
+
+        </android.support.v7.widget.LinearLayoutCompat>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#e1e1e1"/>
+        <android.support.v7.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/default_item_size"
+        android:orientation="horizontal"
+        android:padding="@dimen/default_padding">
+
+        <ImageView
+            android:layout_width="@dimen/default_profile_icon_size"
+            android:layout_height="@dimen/default_profile_icon_size"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/sample_images" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="@dimen/default_padding"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TopCoderTeam"
+                    android:textColor="#a1a1a1"
+                    android:layout_weight="0.7"/>
+
+                <TextView
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:text="1월 9일"
+                    android:textColor="#a1a1a1"
+                    android:gravity="right"
+                    android:layout_weight="0.3"/>
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Mark your calaendar for SRm 828, .. "
+                android:textColor="#a1a1a1"
+                android:textSize="12sp"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="캘린더 내용 blur blur ..... "
+                android:textColor="#a1a1a1"
+                android:textSize="12sp"
+                />
+        </LinearLayout>
+
+    </android.support.v7.widget.LinearLayoutCompat>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#e1e1e1"/>
+    </android.support.v7.widget.LinearLayoutCompat>
 
 
 
-</android.support.v7.widget.LinearLayoutCompat>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@drawable/fab_plus"/>
+
+</FrameLayout>
