@@ -4,29 +4,20 @@
     tools:showIn="navigation_view">
 
 
-    <item android:title="웹 페이지"/>
+
     <group
         android:id="@+id/menuPublicCategory">
 
         <item
-            android:id="@+id/navDefault"
+            android:id="@+id/navSetting"
             android:icon="@drawable/ic_menu_camera"
-            android:title="청와대 청원게시판"/>
+            android:title="설정 "/>
 
 
 
     </group>
 
 
-    <item android:title="신문사"/>
-    <group
-        android:id="@+id/menuNewsCategory">
-
-
-        <item
-            android:id="@+id/newsHani"
-            android:title="한겨레" />
-    </group>
 
 
 

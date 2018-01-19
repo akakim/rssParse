@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.util.Map;
 
 /**
  * @author KIM
@@ -34,8 +35,10 @@ public interface ParseMainBoardInteractor {
         void onFinished(final boolean isError, String result, Bundle responseData);
     }
 
-    void init(AppCompatActivity activity);
+    void init();
 
     void loadBoard(@BoardDefinition  int boardKind);
+    void loadBoard(String url);
+    void loadBoard(String url,Map<String,String> getParameter);
     void initFragment(Fragment fragment);
 }

@@ -12,4 +12,5 @@ import com.akakim.bluehousereaderapp.parse.ParseMainBoardInteractor;
 public interface MainBoardPresenter {
     void initContent();
     void initContent(@ParseMainBoardInteractor.BoardDefinition int def);
+    void initContent(String url);
 }

@@ -8,6 +8,9 @@ import com.akakim.bluehousereaderapp.MainJavaActivity;
 import com.akakim.bluehousereaderapp.parse.parsetask.BlueHouseTask;
 import com.akakim.bluehousereaderapp.ui.activity.*;
 
+import java.util.Iterator;
+import java.util.Map;
+
 
 /**
  * @author KIM
@@ -24,16 +27,8 @@ public class ParseMainBoardImpl implements ParseMainBoardInteractor {
         this.onFinishedListener =onFinishedListener;
     }
     @Override
-    public void init(AppCompatActivity activity) {
-        if (activity == null){
-            return;
-        }else if ( activity instanceof BlueHouseContentActivity){
-            Thread t = new Thread( new BlueHouseTask(onFinishedListener) );
-            t.start();
-        }
-        else {
-            Log.e(getClass().getSimpleName(),"error undefinded");
-        }
+    public void init() {
+
     }
 
     @Override
@@ -50,6 +45,31 @@ public class ParseMainBoardImpl implements ParseMainBoardInteractor {
                 t.start();
                 break;
         }
+    }
+
+    @Override
+    public void loadBoard(String url) {
+        new Thread( new BlueHouseTask( url, onFinishedListener ));
+    }
+
+    @Override
+    public void loadBoard(String url, Map<String, String> getParameter) {
+        
+       Iterator<String> iterator =  getParameter.keySet().iterator();
+
+       StringBuilder builder = new StringBuilder();
+
+       builder.append("?");
+       for(String key : getParameter.keySet() ){
+
+           builder.append(key+"=" +getParameter.get(key)+"&");
+       }
+
+
+       builder.substring( builder.length(),1);
+
+        new Thread( new BlueHouseTask( url + builder.toString(), onFinishedListener )).start();
+
     }
 
     @Override

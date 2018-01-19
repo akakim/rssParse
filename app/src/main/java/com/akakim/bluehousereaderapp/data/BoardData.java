@@ -18,6 +18,7 @@ public class BoardData implements Parcelable{
     public static final String READY_ANSWER_BOARD_TAG = "arriveBoardItem";
     public static final String NORMAL_BOARD_TAG = "normalBoardItem";
 
+
     String boardTag;
     String numberOfContent;         // 0 인경우는 베스트 청원임.
     String boardIdx;                // 게시판 순서

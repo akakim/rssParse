@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="48"
+    android:viewportHeight="48">
+
+    <path
+        android:fillColor="#ffffff"
+        android:fillAlpha="0"
+        android:strokeWidth="1"
+        android:strokeMiterLimit="10"
+        android:pathData="M2,24c0,-12.15026 9.84974,-22 22,-22c12.15026,0 22,9.84974 22,22c0,12.15026-9.84974,22 -22,22c-12.15026,0 -22,-9.84974 -22,-22z" />
+
+    <path
+        android:strokeMiterLimit="10"
+        android:pathData="M30.17917,31.64167l-7.64167,-7.64167l7.64167,-7.64167l-2.35833,-2.35833l-10,10l10,10z" />
+    <path
+        android:fillColor="#ffffff"
+        android:strokeMiterLimit="10"
+        android:pathData="M27.733,33.77011l-9.77011,-9.77011l9.77011,-9.77011l2.30412,2.30412l-7.46599,7.46599l7.46599,7.46599z" />
+    <path
+        android:strokeWidth="1"
+        android:strokeMiterLimit="10"
+        android:pathData="M2,24c0,-12.15026 9.84974,-22 22,-22c12.15026,0 22,9.84974 22,22c0,12.15026-9.84974,22 -22,22c-12.15026,0 -22,-9.84974 -22,-22z" />
+    <path
+        android:strokeWidth="1"
+        android:strokeMiterLimit="10"
+        android:pathData="M 2 2 H 46 V 24 H 2 V 2 Z" />
+    <path
+        android:strokeWidth="1"
+        android:strokeMiterLimit="10"
+        android:pathData="M2,24v-22h44v22z" />
+    <path
+        android:strokeWidth="1"
+        android:strokeMiterLimit="10"
+        android:pathData="M2,24v-22h44v22z" />
+    <path
+        android:strokeWidth="1"
+        android:strokeMiterLimit="10"
+        android:pathData="M2,24v-22h44v22z" />
+    <path
+        android:strokeWidth="1"
+        android:strokeMiterLimit="10"
+        android:pathData="M2,24v-22h44v22z" />
+</vector>

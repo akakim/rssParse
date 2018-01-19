@@ -23,7 +23,10 @@ import android.widget.Toast;
 import android.support.v7.widget.Toolbar;
 
 import com.akakim.bluehousereaderapp.adapter.BoardCategoryFragmentAdapter;
+import com.akakim.bluehousereaderapp.adapter.FeedListAdapter;
 import com.akakim.bluehousereaderapp.data.BoardData;
+import com.akakim.bluehousereaderapp.data.Constants;
+import com.akakim.bluehousereaderapp.data.FeedData;
 import com.akakim.bluehousereaderapp.ui.MainBoardCallback;
 import com.akakim.bluehousereaderapp.ui.MainBoardPresenterImpl;
 import com.akakim.bluehousereaderapp.ui.activity.BaseActivity;
@@ -59,7 +62,10 @@ public class MainJavaActivity extends BaseActivity implements MainBoardCallback,
     TextView tvErrorMessage;
 
 
+    FeedListAdapter feedListAdapter;
 
+
+    List<FeedData> feedData = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,12 +86,22 @@ public class MainJavaActivity extends BaseActivity implements MainBoardCallback,
 
         navigationView.setNavigationItemSelectedListener(this);
 
-        mainBoardCallback = new MainBoardPresenterImpl(this , this);
+//        mainBoardCallback = new MainBoardPresenterImpl(this , this);
 
 
 
 //        rvBoardList.setLayoutManager( new LinearLayoutManager(this));
 
+
+        feedData.add( new FeedData( "청와대 뉴스피드 ", Constants.PUBLIC_OPINION_BASE_URL , BlueHouseContentActivity.class ) );
+        feedData.add( new FeedData( "청와대 뉴스피드 (추천순)", Constants.PUBLIC_OPINION_BEST_ORDER_URL , BlueHouseContentActivity.class ) );
+
+        feedListAdapter = new FeedListAdapter(feedData,this);
+
+
+        rvBoardList.setLayoutManager( new LinearLayoutManager( this ));
+        rvBoardList.setAdapter( feedListAdapter );
+        rvBoardList.setNestedScrollingEnabled( false );
     }
 
 

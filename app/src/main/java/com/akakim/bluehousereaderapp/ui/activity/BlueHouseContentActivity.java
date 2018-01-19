@@ -23,10 +23,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.akakim.bluehousereaderapp.R;
+import com.akakim.bluehousereaderapp.adapter.BlueHouseFragmentAdapter;
 import com.akakim.bluehousereaderapp.adapter.BoardAdapter;
 import com.akakim.bluehousereaderapp.adapter.BoardCategoryFragmentAdapter;
 import com.akakim.bluehousereaderapp.data.BoardData;
+import com.akakim.bluehousereaderapp.data.FeedData;
 import com.akakim.bluehousereaderapp.parse.ParseMainBoardInteractor;
+import com.akakim.bluehousereaderapp.ui.BlueHouseFragment;
 import com.akakim.bluehousereaderapp.ui.MainBoardCallback;
 import com.akakim.bluehousereaderapp.ui.MainBoardPresenterImpl;
 import com.akakim.bluehousereaderapp.ui.view.SwipeRefreshLayoutBottom;
@@ -49,37 +52,38 @@ public class BlueHouseContentActivity extends BaseActivity implements MainBoardC
     public static String INIT_RECOMEND_BOARD    ="com.akakim.bluehousereaderapp.ui.activity.BlueHouseContentActivity.recommendedBoard";
 
 
-//    @BindView(R.id.toolbar)
-//    Toolbar toolbar;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
     MainBoardPresenterImpl mainBoardCallback;
 
-//    @BindView(R.id.blueHouseHeader)
-//    LinearLayoutCompat blueHouseHeader;
-//
-//    @BindViews({
-//            R.id.tvBestOpinionTitle,
-//            R.id.tvBestOpinionContent,
-//            R.id.tvBestOpinionId,
-//            R.id.tvBestOpinionCount,
-//            R.id.tvBestOpinionDateAmount
-//    })
-//    List<TextView> bestOpinionList = new ArrayList<TextView>();
+    @BindView(R.id.blueHouseHeader)
+    LinearLayoutCompat blueHouseHeader;
+
+    @BindViews({
+            R.id.tvBestOpinionTitle,
+            R.id.tvBestOpinionContent,
+            R.id.tvBestOpinionId,
+            R.id.tvBestOpinionCount,
+            R.id.tvBestOpinionDateAmount
+    })
+    List<TextView> bestOpinionList = new ArrayList<TextView>();
 
     Uri bestLink;
 
-    @BindView( R.id.rvBoardList)
-    RecyclerView rvBoardList;
 
 //    @BindView(R.id.tvErrorMessage)
 //    TextView tvErrorMessage;
 
 
-    @BindView(R.id.swLayout)
-    SwipeRefreshLayoutBottom swLayout;
+    @BindView(R.id.rvBoardViewPager)
+    ViewPager viewPager;
 
 
+    BlueHouseFragmentAdapter blueHouseFragmentAdapter;
     ArrayList<BoardData> boardDataArrayList = new ArrayList<>();
+    ArrayList<BlueHouseFragment> blueHouseFragmentArrayList = new ArrayList<>();
+    ArrayList<ArrayList<BoardData>> boardDataListList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,28 +93,30 @@ public class BlueHouseContentActivity extends BaseActivity implements MainBoardC
 //        setSupportActionBar(toolbar);
 
 
-        mainBoardCallback = new MainBoardPresenterImpl(this , this);
+        mainBoardCallback = new MainBoardPresenterImpl(this );
+
+        String getData =getIntent().getStringExtra(FeedData.FEED_ITEM_KEY);
+        mainBoardCallback.initContent( getData );
 
 
-        if(getIntent().getStringExtra("action").equals(INIT_BOARD)){
-            mainBoardCallback.initContent(ParseMainBoardInteractor.BLUE_HOUSE_INIT_BOARD);
-        }else {
-            mainBoardCallback.initContent(ParseMainBoardInteractor.BLUE_HOUSE_RECOMAND_MAIN);
+        for (int k =0 ;k<3;k++){
+            BlueHouseFragment fragment = new BlueHouseFragment();
+
+            blueHouseFragmentArrayList.add (new BlueHouseFragment() );
         }
-
-        swLayout.setOnRefreshListener(new SwipeRefreshLayoutBottom.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                Toast.makeText(BlueHouseContentActivity.this,"새로 갱신한다!",Toast.LENGTH_SHORT).show();
-            }
-        });
+        blueHouseFragmentAdapter = new BlueHouseFragmentAdapter(getSupportFragmentManager(),blueHouseFragmentArrayList,boardDataListList );
+        viewPager.setAdapter(  blueHouseFragmentAdapter );
 
 
-        rvBoardList.setLayoutManager( new LinearLayoutManager( this ));
 
-        rvBoardList.setAdapter( new BoardAdapter(this, boardDataArrayList ));
-        Log.d(getClass().getSimpleName(),"getHeight recyclerView : " + rvBoardList.getHeight());
-        Log.d(getClass().getSimpleName(),"getMesured Height recyclerView : " + rvBoardList.getMeasuredHeight());
+//        swLayout.setOnRefreshListener(new SwipeRefreshLayoutBottom.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//                Toast.makeText(BlueHouseContentActivity.this,"새로 갱신한다!",Toast.LENGTH_SHORT).show();
+//            }
+//        });
+
+
     }
 
 
@@ -145,20 +151,9 @@ public class BlueHouseContentActivity extends BaseActivity implements MainBoardC
                 Log.d("onResponseTimeOutFailed",result);
             }
         }
-//        Toast.makeText(this,result,Toast.LENGTH_SHORT).show();
     }
 
-//    @OnClick(R.id.btnShowDetail)
-//    public void showDetail(){
-//
-//        if ( bestLink == null){
-//            Toast.makeText(this,"초기화 오류",Toast.LENGTH_SHORT ).show();
-//        }else {
-//
-//            Intent showAction = new Intent(Intent.ACTION_VIEW,bestLink);
-//            startActivity(showAction);
-//        }
-//    }
+
     @Override
     public void responseSuccess(@NonNull Bundle boardData) {
         progressDialog.dismiss();
@@ -168,11 +163,11 @@ public class BlueHouseContentActivity extends BaseActivity implements MainBoardC
         Boolean isBestBoardShow = boardData.getBoolean( BoardData.BEST_BOARD_TAG );
         Boolean isAnswerBoardShow = boardData.getBoolean( BoardData.READY_ANSWER_BOARD_TAG);
 
-//        if( isBestBoardShow ){
-//            blueHouseHeader.setVisibility( View.VISIBLE);
-//        }else {
-//            blueHouseHeader.setVisibility( View.GONE);
-//        }
+        if( isBestBoardShow ){
+            blueHouseHeader.setVisibility( View.VISIBLE);
+        }else {
+            blueHouseHeader.setVisibility( View.GONE);
+        }
 
         if( isAnswerBoardShow ){
 
@@ -183,31 +178,23 @@ public class BlueHouseContentActivity extends BaseActivity implements MainBoardC
             switch ( item.getBoardTag() ){
 
                 case BoardData.BEST_BOARD_TAG:
-//                    bestOpinionList.get(0).setText( item.getTitle() );
-//                    bestOpinionList.get(1).setText( item.getThumbnailContent() );
-//                    bestOpinionList.get(2).setText( "청원인 : " + item.getAuthor() );
-//                    bestOpinionList.get(3).setText( "신청인 : " + item.getNumberOfJoinPeople() );
-//                    bestOpinionList.get(4).setText( "청원기간 : " + item.getTerm() );
+                    bestOpinionList.get(0).setText( item.getTitle() );
+                    bestOpinionList.get(1).setText( item.getThumbnailContent() );
+                    bestOpinionList.get(2).setText( "청원인 : " + item.getAuthor() );
+                    bestOpinionList.get(3).setText( "신청인 : " + item.getNumberOfJoinPeople() );
+                    bestOpinionList.get(4).setText( "청원기간 : " + item.getTerm() );
 
                     bestLink = Uri.parse( item.getLink() );
                     break;
-
-                case BoardData.READY_ANSWER_BOARD_TAG:
-                    break;
-                case BoardData.NORMAL_BOARD_TAG:
-
-                    boardDataArrayList.add( item );
-                    break;
+//                case BoardData.READY_ANSWER_BOARD_TAG:
+//                    break;
+//                case BoardData.NORMAL_BOARD_TAG:
+//                    boardDataArrayList.add( item );
+//                    break;
                 default:
                     break;
             }
         }
-
-        rvBoardList.getAdapter().notifyDataSetChanged();
-        rvBoardList.requestLayout();
-
-        Log.d(getClass().getSimpleName(),"getHeight recyclerView : " + rvBoardList.getHeight());
-        Log.d(getClass().getSimpleName(),"getMesured Height recyclerView : " + rvBoardList.getMeasuredHeight());
 
     }
 

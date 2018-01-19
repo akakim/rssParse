@@ -28,9 +28,16 @@ import kotlin.coroutines.experimental.CoroutineContext;
 
 public class BlueHouseTask implements Runnable  {
 
+
+    String url = "";
     ParseMainBoardInteractor.OnFinishedListener onFinishedListener  ;
 
     public BlueHouseTask(ParseMainBoardInteractor.OnFinishedListener onFinishedListener) {
+        this ( Constants.PUBLIC_OPINION_BASE_URL,onFinishedListener );
+    }
+
+    public BlueHouseTask(String url, ParseMainBoardInteractor.OnFinishedListener onFinishedListener) {
+        this.url = url;
         this.onFinishedListener = onFinishedListener;
     }
 
@@ -44,7 +51,7 @@ public class BlueHouseTask implements Runnable  {
         ArrayList<BoardData> boardDataArrayList = new ArrayList<BoardData>();
         try{
 
-            Connection connection = Jsoup.connect(Constants.PUBLIC_OPINION_BASE_URL);
+            Connection connection = Jsoup.connect(url);
             connection.timeout(6000);
             Document doc = connection.get();
             Elements classDivs = doc.select("div[class]");

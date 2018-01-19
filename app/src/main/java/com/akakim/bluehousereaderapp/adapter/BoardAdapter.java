@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.akakim.bluehousereaderapp.R;
 import com.akakim.bluehousereaderapp.data.BoardData;
+import com.akakim.bluehousereaderapp.ui.activity.BlueHouseBoardFragment;
 
 import java.util.ArrayList;
 
@@ -27,15 +28,17 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.BoardViewHol
 
     Context context;
     ArrayList<BoardData> boardDataItems;
+    BlueHouseBoardFragment.OnListFragmentInteractionListener listener;
 
-    public BoardAdapter(Context context,ArrayList<BoardData> boardDataItems) {
+    public BoardAdapter(Context context, ArrayList<BoardData> boardDataItems , BlueHouseBoardFragment.OnListFragmentInteractionListener listener) {
         this.context = context;
         this.boardDataItems = boardDataItems;
+        this.listener = listener;
     }
 
     @Override
     public BoardViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new BoardViewHolder( LayoutInflater.from(context).inflate(R.layout.blue_house_board_layout,null,false) );
+        return new BoardViewHolder( LayoutInflater.from(context).inflate(R.layout.blue_house_board_layout,parent,false) );
     }
 
     @Override
@@ -43,6 +46,9 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.BoardViewHol
 
         final BoardData item = boardDataItems.get(position);
 
+        holder.itemView.setOnClickListener( (view)->{
+            listener.onListFragmentInteraction( item);
+        });
         holder.tvBoardIdx.setText( item.getBoardIdx() );
         holder.tvCategory.setText( item.getCategory() );
         holder.tvNumberOfJoinedPeople.setText( item.getNumberOfJoinPeople() );

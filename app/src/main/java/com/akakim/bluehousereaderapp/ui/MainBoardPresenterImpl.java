@@ -22,20 +22,19 @@ public class MainBoardPresenterImpl implements MainBoardPresenter,ParseMainBoard
 
     MainBoardCallback mainBoardCallback;
     ParseMainBoardImpl parseMainBoard;
-    BaseActivity activity;
 
 
-    public MainBoardPresenterImpl(MainBoardCallback mainBoardCallback, BaseActivity activity) {
+    public MainBoardPresenterImpl(MainBoardCallback mainBoardCallback) {
         this.mainBoardCallback = mainBoardCallback;
-        this.activity = activity;
+
 
         parseMainBoard = new ParseMainBoardImpl(this);
     }
 
     @Override
     public void initContent() {
-        mainBoardCallback.showMessage("데이터 로딩중");
-        parseMainBoard.init(activity);
+//        mainBoardCallback.showMessage("데이터 로딩중");
+//        parseMainBoard.init();
 
     }
 
@@ -46,6 +45,13 @@ public class MainBoardPresenterImpl implements MainBoardPresenter,ParseMainBoard
         parseMainBoard.loadBoard( def );
 
     }
+
+    @Override
+    public void initContent(String url) {
+        mainBoardCallback.showMessage("데이터 로딩중");
+        parseMainBoard.loadBoard( url );
+    }
+
 
     @Override
     public void onFinished(boolean isError,String result, Bundle responseData ) {
