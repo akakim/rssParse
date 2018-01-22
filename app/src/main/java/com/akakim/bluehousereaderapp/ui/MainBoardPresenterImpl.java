@@ -2,6 +2,7 @@ package com.akakim.bluehousereaderapp.ui;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.akakim.bluehousereaderapp.data.BoardData;
 import com.akakim.bluehousereaderapp.parse.ParseMainBoardImpl;
@@ -50,12 +51,13 @@ public class MainBoardPresenterImpl implements MainBoardPresenter,ParseMainBoard
     public void initContent(String url) {
         mainBoardCallback.showMessage("데이터 로딩중");
         parseMainBoard.loadBoard( url );
+        Log.d(getClass().getSimpleName(), "iniContent url : " + url );
     }
 
 
     @Override
     public void onFinished(boolean isError,String result, Bundle responseData ) {
-
+        Log.d(getClass().getSimpleName(), "onFinished result : " + result );
         Runnable failRunnable = ()-> { mainBoardCallback.responseFailed(result);  };
         Runnable successRunnable = ()-> { mainBoardCallback.responseSuccess( responseData );};
 

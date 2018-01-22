@@ -9,7 +9,7 @@ package com.akakim.bluehousereaderapp.data;
 
 public class Constants {
     public static final String PUBLIC_OPINION_BASE_URL = "https://www1.president.go.kr/petitions";
-    public static final String PUBLIC_OPINION_BEST_ORDER_URL = "https://www1.president.go.kr/petitions?order=best";
+//    public static final String PUBLIC_OPINION_BEST_ORDER_URL = "https://www1.president.go.kr/petitions?order=best";
 
     // PUBLIC_OPINION_BASE_URL 쓰는 영역
     // get 방식으로 parameter를 보낸다.

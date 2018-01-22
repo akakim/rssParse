@@ -1,57 +1,48 @@
 package com.akakim.bluehousereaderapp.ui.activity;
 
-import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutCompat;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.akakim.bluehousereaderapp.R;
+import com.akakim.bluehousereaderapp.Util;
 import com.akakim.bluehousereaderapp.adapter.BlueHouseFragmentAdapter;
-import com.akakim.bluehousereaderapp.adapter.BoardAdapter;
-import com.akakim.bluehousereaderapp.adapter.BoardCategoryFragmentAdapter;
 import com.akakim.bluehousereaderapp.data.BoardData;
 import com.akakim.bluehousereaderapp.data.FeedData;
-import com.akakim.bluehousereaderapp.parse.ParseMainBoardInteractor;
-import com.akakim.bluehousereaderapp.ui.BlueHouseFragment;
+import com.akakim.bluehousereaderapp.ui.fragment.BlueHouseFragment;
 import com.akakim.bluehousereaderapp.ui.MainBoardCallback;
 import com.akakim.bluehousereaderapp.ui.MainBoardPresenterImpl;
-import com.akakim.bluehousereaderapp.ui.view.SwipeRefreshLayoutBottom;
+import com.akakim.bluehousereaderapp.ui.fragment.SampleBlackFragment;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * activity 단위로 화면을 호출.
  */
-public class BlueHouseContentActivity extends BaseActivity implements MainBoardCallback {
+public class BlueHouseContentActivity extends BaseActivity implements MainBoardCallback,BlueHouseFragment.OnFragmentInteractionListener,SampleBlackFragment.OnFragmentInteractionListener  {
 
 
     public static String INIT_BOARD             ="com.akakim.bluehousereaderapp.ui.activity.BlueHouseContentActivity.recentlyUpdated";
     public static String INIT_RECOMEND_BOARD    ="com.akakim.bluehousereaderapp.ui.activity.BlueHouseContentActivity.recommendedBoard";
 
 
+    public static final String BLUE_HOUSE_BASIC_TYPE= "blueHouseBasic";
+    public static final String BLUE_HOUSE_POPPULAR_TYPE= "blueHousePop";
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
@@ -82,39 +73,68 @@ public class BlueHouseContentActivity extends BaseActivity implements MainBoardC
 
     BlueHouseFragmentAdapter blueHouseFragmentAdapter;
     ArrayList<BoardData> boardDataArrayList = new ArrayList<>();
-    ArrayList<BlueHouseFragment> blueHouseFragmentArrayList = new ArrayList<>();
+    ArrayList<Fragment> blueHouseFragmentArrayList = new ArrayList<>();
     ArrayList<ArrayList<BoardData>> boardDataListList = new ArrayList<>();
+
+
+    Map<String,String> getParmeterMap = new HashMap<>();
+
+    @BindView(R.id.nestedScrollView)
+    NestedScrollView nestedScrollView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_blue_house_content);
 
         ButterKnife.bind(this);
-//        setSupportActionBar(toolbar);
+        setSupportActionBar(toolbar);
 
 
         mainBoardCallback = new MainBoardPresenterImpl(this );
 
-        String getData =getIntent().getStringExtra(FeedData.FEED_ITEM_KEY);
-        mainBoardCallback.initContent( getData );
+        String getFeedURLItem =getIntent().getStringExtra(FeedData.FEED_BASE_URL_ITEM);
+        String getURLTypeItem = getIntent().getStringExtra(FeedData.FEED_TYPE_ITEM );
+
+        if( BLUE_HOUSE_POPPULAR_TYPE.equals( getURLTypeItem) ){
+            getParmeterMap.put("order","best");
+
+            String bestOrder  = Util.getURLFactory( getFeedURLItem,getParmeterMap );
+            mainBoardCallback.initContent( bestOrder );
+        }else {
+            mainBoardCallback.initContent( getFeedURLItem );
+
+        }
+
+
+
 
 
         for (int k =0 ;k<3;k++){
-            BlueHouseFragment fragment = new BlueHouseFragment();
 
-            blueHouseFragmentArrayList.add (new BlueHouseFragment() );
+//            SampleBlackFragment sample = new SampleBlackFragment();
+//            blueHouseFragmentArrayList.add(sample);
+            BlueHouseFragment fragment = new BlueHouseFragment();
+            getParmeterMap.put(BlueHouseFragment.URL,String.valueOf(k));
+            String dynamicURL = Util.getURLFactory( getFeedURLItem,getParmeterMap );
+
+            Log.d(getClass().getSimpleName(),"on Create URL " + dynamicURL );
+
+            Bundle bundle = new Bundle();
+
+            bundle.putString(BlueHouseFragment.URL, dynamicURL );
+
+
+
+            fragment.setArguments(bundle );
+            blueHouseFragmentArrayList.add  (fragment );
         }
-        blueHouseFragmentAdapter = new BlueHouseFragmentAdapter(getSupportFragmentManager(),blueHouseFragmentArrayList,boardDataListList );
+
+        blueHouseFragmentAdapter = new BlueHouseFragmentAdapter(getSupportFragmentManager(),blueHouseFragmentArrayList );
         viewPager.setAdapter(  blueHouseFragmentAdapter );
 
+        nestedScrollView.setFillViewport( true );
 
 
-//        swLayout.setOnRefreshListener(new SwipeRefreshLayoutBottom.OnRefreshListener() {
-//            @Override
-//            public void onRefresh() {
-//                Toast.makeText(BlueHouseContentActivity.this,"새로 갱신한다!",Toast.LENGTH_SHORT).show();
-//            }
-//        });
 
 
     }
@@ -196,6 +216,12 @@ public class BlueHouseContentActivity extends BaseActivity implements MainBoardC
             }
         }
 
+
+
+        Log.d(getClass().getSimpleName(),"get MeasuredHeight = "+        viewPager.getMeasuredHeight());
+        Log.d(getClass().getSimpleName(),"get MeasuredHeight = "+        viewPager.getMeasuredHeightAndState());
+
+
     }
 
     @Override
@@ -213,6 +239,12 @@ public class BlueHouseContentActivity extends BaseActivity implements MainBoardC
     public void showAlert() {
 
     }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
+
 
 //    @OnClick(R.id.tvErrorMessage)
 //    public void refreshBoard(){

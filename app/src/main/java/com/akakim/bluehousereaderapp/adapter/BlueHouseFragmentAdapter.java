@@ -1,15 +1,13 @@
 package com.akakim.bluehousereaderapp.adapter;
 
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.util.Log;
 import android.view.ViewGroup;
 
 import com.akakim.bluehousereaderapp.data.BoardData;
-import com.akakim.bluehousereaderapp.ui.BlueHouseFragment;
-import com.akakim.bluehousereaderapp.ui.activity.BlueHouseBoardFragment;
-import com.akakim.bluehousereaderapp.ui.activity.BlueHouseContentActivity;
+import com.akakim.bluehousereaderapp.ui.fragment.BlueHouseFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,13 +18,13 @@ import java.util.List;
 
 public class BlueHouseFragmentAdapter  extends FragmentStatePagerAdapter{
 
-    List<BlueHouseFragment> fragmentList = new ArrayList<>();
+    List<Fragment> fragmentList = new ArrayList<>();
     ArrayList<BoardData> boardDataList = new ArrayList<>();
 
     ArrayList< ArrayList<BoardData>> boardDataListList = new ArrayList<>();
     int defaultSize;
 
-    public BlueHouseFragmentAdapter(FragmentManager fm, List<BlueHouseFragment> fragmentList ) {
+    public BlueHouseFragmentAdapter(FragmentManager fm, List<Fragment> fragmentList ) {
         super(fm);
 
         this.fragmentList = fragmentList;
@@ -34,7 +32,7 @@ public class BlueHouseFragmentAdapter  extends FragmentStatePagerAdapter{
 
     }
 
-    public BlueHouseFragmentAdapter(FragmentManager fm, List<BlueHouseFragment> fragmentList, ArrayList< ArrayList<BoardData>> boardDataListList ) {
+    public BlueHouseFragmentAdapter(FragmentManager fm, List<Fragment> fragmentList, ArrayList< ArrayList<BoardData>> boardDataListList ) {
         super(fm);
 
         this.fragmentList = fragmentList;
@@ -49,23 +47,44 @@ public class BlueHouseFragmentAdapter  extends FragmentStatePagerAdapter{
 
         Object obj  = super.instantiateItem(container, position);
 
+
+
         if (obj instanceof Fragment ){
 
-            Bundle bundle  =new Bundle();
+//            Bundle bundle  =new Bundle();
+//
+//            if( position == 0 ){
+//                bundle.putBoolean(BlueHouseFragment.IS_UPDATE_KEY,false);
+//                bundle.putParcelableArrayList( BoardData.BOARD_ITEMS_KEY , this.boardDataListList.get(position));
+//
+//            }else {
+//                ArrayList<BoardData> empty = new ArrayList<>();
+//                bundle.putBoolean(BlueHouseFragment.IS_UPDATE_KEY,true);
+//                bundle.putParcelableArrayList( BoardData.BOARD_ITEMS_KEY ,this.boardDataListList.get(position) );
+//            }
+//
+//            ((Fragment) obj).getView().get
 
-            if( position == 0 ){
-                bundle.putBoolean(BlueHouseBoardFragment.IS_UPDATE_KEY,false);
-                bundle.putParcelableArrayList( BoardData.BOARD_ITEMS_KEY , this.boardDataListList.get(position));
 
-            }else {
-                ArrayList<BoardData> empty = new ArrayList<>();
-                bundle.putBoolean(BlueHouseBoardFragment.IS_UPDATE_KEY,true);
-                bundle.putParcelableArrayList( BoardData.BOARD_ITEMS_KEY ,this.boardDataListList.get(position) );
-            }
-
-            ((Fragment) obj).setArguments( bundle );
         }
         return obj;
+    }
+
+
+    @Override
+    public void startUpdate(ViewGroup container) {
+        super.startUpdate(container);
+    }
+
+    @Override
+    public void finishUpdate(ViewGroup container) {
+        super.finishUpdate(container);
+
+        if( container !=null){
+            Log.d(getClass().getSimpleName(),"get containerSize " + container.getMeasuredHeight());
+        }else {
+            Log.e(getClass().getSimpleName(),"container is nulllllll " );
+        }
     }
 
     @Override

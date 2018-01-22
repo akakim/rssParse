@@ -21,11 +21,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.FullBoardContentActivity" />
-        <activity
-            android:name=".ui.activity.Main2Activity"
-            android:label="@string/title_activity_main2"
-            android:theme="@style/AppTheme" />
         <activity android:name=".ui.activity.BlueHouseContentActivity"></activity>
     </application>
 

@@ -49,7 +49,7 @@ public class ParseMainBoardImpl implements ParseMainBoardInteractor {
 
     @Override
     public void loadBoard(String url) {
-        new Thread( new BlueHouseTask( url, onFinishedListener ));
+        new Thread( new BlueHouseTask( url, onFinishedListener )).start();
     }
 
     @Override

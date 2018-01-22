@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import com.akakim.bluehousereaderapp.R;
 import com.akakim.bluehousereaderapp.data.BoardData;
-import com.akakim.bluehousereaderapp.ui.activity.BlueHouseBoardFragment;
 
 import java.util.ArrayList;
 
@@ -23,14 +22,14 @@ import butterknife.ButterKnife;
  * @since 0.0.1
  */
 
-public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.BoardViewHolder>{
+public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.BoardViewHolder> {
 
 
     Context context;
     ArrayList<BoardData> boardDataItems;
-    BlueHouseBoardFragment.OnListFragmentInteractionListener listener;
+    OnListFragmentInteractionListener listener;
 
-    public BoardAdapter(Context context, ArrayList<BoardData> boardDataItems , BlueHouseBoardFragment.OnListFragmentInteractionListener listener) {
+    public BoardAdapter(Context context, ArrayList<BoardData> boardDataItems , OnListFragmentInteractionListener listener) {
         this.context = context;
         this.boardDataItems = boardDataItems;
         this.listener = listener;
@@ -47,8 +46,11 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.BoardViewHol
         final BoardData item = boardDataItems.get(position);
 
         holder.itemView.setOnClickListener( (view)->{
-            listener.onListFragmentInteraction( item);
-        });
+            if( listener != null ){
+                listener.onListFragmentInteraction( item );
+            }
+
+         });
         holder.tvBoardIdx.setText( item.getBoardIdx() );
         holder.tvCategory.setText( item.getCategory() );
         holder.tvNumberOfJoinedPeople.setText( item.getNumberOfJoinPeople() );
@@ -87,5 +89,10 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.BoardViewHol
             ButterKnife.bind(this,itemView);
 
         }
+    }
+
+    public interface OnListFragmentInteractionListener {
+        // TODO: Update argument type and name
+        void onListFragmentInteraction(BoardData item);
     }
 }

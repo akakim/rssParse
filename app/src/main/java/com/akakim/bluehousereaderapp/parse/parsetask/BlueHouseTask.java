@@ -102,12 +102,12 @@ public class BlueHouseTask implements Runnable  {
                     case "board text":
 
                         if("답변 대기 중인 청원".equals( ele.select("h4").text())) {
-                            Log.d(getClass().getSimpleName(),"답변 대기 중은 결정안됨 ");
-                            Log.d(getClass().getSimpleName(),ele.text());
+//                            Log.d(getClass().getSimpleName(),"답변 대기 중은 결정안됨 ");
+//                            Log.d(getClass().getSimpleName(),ele.text());
                             break;
                         }else if("청원 목록".equals( ele.select("h4").text())){
-                            Log.d(getClass().getSimpleName(),"청원목록  ");
-                            Log.d(getClass().getSimpleName(),ele.text());
+//                            Log.d(getClass().getSimpleName(),"청원목록  ");
+//                            Log.d(getClass().getSimpleName(),ele.text());
 
                             Elements ulTag = ele.select("ul");
 

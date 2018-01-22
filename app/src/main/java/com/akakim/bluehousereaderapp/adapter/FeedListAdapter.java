@@ -2,7 +2,6 @@ package com.akakim.bluehousereaderapp.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,7 +56,8 @@ public class FeedListAdapter extends RecyclerView.Adapter<FeedListAdapter.ViewHo
 
 
 
-                i.putExtra(FeedData.FEED_ITEM_KEY,data.getFeedURL());
+                i.putExtra(FeedData.FEED_BASE_URL_ITEM,data.getFeedURL());
+                i.putExtra(FeedData.FEED_TYPE_ITEM,data.getType());
                 context.startActivity( i );
             }
         });

@@ -93,8 +93,8 @@ public class MainJavaActivity extends BaseActivity implements MainBoardCallback,
 //        rvBoardList.setLayoutManager( new LinearLayoutManager(this));
 
 
-        feedData.add( new FeedData( "청와대 뉴스피드 ", Constants.PUBLIC_OPINION_BASE_URL , BlueHouseContentActivity.class ) );
-        feedData.add( new FeedData( "청와대 뉴스피드 (추천순)", Constants.PUBLIC_OPINION_BEST_ORDER_URL , BlueHouseContentActivity.class ) );
+        feedData.add( new FeedData( "청와대 뉴스피드 ", Constants.PUBLIC_OPINION_BASE_URL , BlueHouseContentActivity.BLUE_HOUSE_BASIC_TYPE, BlueHouseContentActivity.class ) );
+        feedData.add( new FeedData( "청와대 뉴스피드 (추천순)", Constants.PUBLIC_OPINION_BASE_URL , BlueHouseContentActivity.BLUE_HOUSE_POPPULAR_TYPE , BlueHouseContentActivity.class ) );
 
         feedListAdapter = new FeedListAdapter(feedData,this);
 
