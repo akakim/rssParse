@@ -67,7 +67,7 @@ public class BlueHouseFragment extends Fragment implements MainBoardCallback,Boa
         return fragment;
     }
 
-    @Override
+    @Override`
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
