@@ -10,13 +10,11 @@ import android.os.Parcelable;
 
 public class FeedData {
 
-    public static final String FEED_BASE_URL_ITEM = "feedBasicURLItem";
+
     public static final String FEED_TYPE_ITEM ="feedType";
 
     String feedName;
     String type;
-    String feedURL;
-
 
     Class<?> aClass;
 
@@ -24,11 +22,11 @@ public class FeedData {
     public FeedData() {
     }
 
-    public FeedData(String feedName, String feedURL,String type, Class<?> aClass) {
-        this.feedName = feedName;
-        this.feedURL = feedURL;
-        this.type = type;
-        this.aClass = aClass;
+    public FeedData(String feedName, String type, Class<?> aClass) {
+        this.feedName   = feedName;
+        this.type       = type;
+        this.aClass     = aClass;
+
     }
 
 
@@ -38,14 +36,6 @@ public class FeedData {
 
     public void setFeedName(String feedName) {
         this.feedName = feedName;
-    }
-
-    public String getFeedURL() {
-        return feedURL;
-    }
-
-    public void setFeedURL(String feedURL) {
-        this.feedURL = feedURL;
     }
 
 
@@ -66,12 +56,6 @@ public class FeedData {
         this.type = type;
     }
 
-    @Override
-    public String toString() {
-        return "FeedData{" +
-                "feedName='" + feedName + '\'' +
-                ", feedURL='" + feedURL + '\'' +
-                ", aClass=" + aClass.getSimpleName() +
-                '}';
-    }
+
+
 }

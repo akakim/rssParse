@@ -1,5 +1,6 @@
 package com.akakim.bluehousereaderapp.adapter;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -16,10 +17,11 @@ import java.util.List;
  * Created by RyoRyeong Kim on 2018-01-19.
  */
 
+@Deprecated
 public class BlueHouseFragmentAdapter  extends FragmentStatePagerAdapter{
 
-    List<Fragment> fragmentList = new ArrayList<>();
-    ArrayList<BoardData> boardDataList = new ArrayList<>();
+    List<Fragment> fragmentList                     = new ArrayList<>();
+    ArrayList<BoardData> boardDataList                  = new ArrayList<>();
 
     ArrayList< ArrayList<BoardData>> boardDataListList = new ArrayList<>();
     int defaultSize;
@@ -49,8 +51,8 @@ public class BlueHouseFragmentAdapter  extends FragmentStatePagerAdapter{
 
 
 
-        if (obj instanceof Fragment ){
-
+//        if (obj instanceof Fragment ){
+//
 //            Bundle bundle  =new Bundle();
 //
 //            if( position == 0 ){
@@ -66,7 +68,7 @@ public class BlueHouseFragmentAdapter  extends FragmentStatePagerAdapter{
 //            ((Fragment) obj).getView().get
 
 
-        }
+//        }
         return obj;
     }
 

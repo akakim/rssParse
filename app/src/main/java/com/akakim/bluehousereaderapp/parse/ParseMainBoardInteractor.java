@@ -1,5 +1,6 @@
 package com.akakim.bluehousereaderapp.parse;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.IntDef;
 import android.support.v4.app.Fragment;
@@ -14,31 +15,19 @@ import java.util.Map;
  * @version 0.0.1
  * @date 2017-12-23
  * @since 0.0.1
+ * 게시판을 분석하는 과정의 모음 .
  */
 
 public interface ParseMainBoardInteractor {
-
-
-    int BLUE_HOUSE_INIT_BOARD = 0;
-    int BLUE_HOUSE_RECOMAND_MAIN = 1;
-
-
-
-
-    @IntDef( {BLUE_HOUSE_INIT_BOARD, BLUE_HOUSE_RECOMAND_MAIN})
-    @Retention( RetentionPolicy.SOURCE )
-
-    @interface BoardDefinition{}
-
 
     interface OnFinishedListener{
         void onFinished(final boolean isError, String result, Bundle responseData);
     }
 
     void init();
-
-    void loadBoard(@BoardDefinition  int boardKind);
     void loadBoard(String url);
+    void loadBoard(Uri uri);
+    void loadNextPage(int specificPageNumber);
     void loadBoard(String url,Map<String,String> getParameter);
-    void initFragment(Fragment fragment);
+
 }

@@ -13,47 +13,47 @@ import android.os.Parcelable;
 public class BoardData implements Parcelable{
 
 
-    public static final String BEST_BOARD_TAG = "bestBoardItem";
-    public static final String BOARD_ITEMS_KEY = "boardItems";
-    public static final String READY_ANSWER_BOARD_TAG = "arriveBoardItem";
-    public static final String NORMAL_BOARD_TAG = "normalBoardItem";
+    public static final String BEST_BOARD_TAG           = "bestBoardItem";
+    public static final String BOARD_ITEMS_KEY          = "boardItems";
+    public static final String READY_ANSWER_BOARD_TAG   = "arriveBoardItem";
+    public static final String NORMAL_BOARD_TAG         = "normalBoardItem";
 
 
-    String boardTag;
-    String numberOfContent;         // 0 인경우는 베스트 청원임.
-    String boardIdx;                // 게시판 순서
-    String category;                // 게시판 종류
-    String title;                   // 게시판 제목
-    String author;                  // 저자
-    String term;                    // 청원 기간
-    String numberOfJoinPeople;      // 청원에 참여한 인원
-    String link;                    // 게시판 링크
+    private String boardTag;
+    private String numberOfContent;         // 0 인경우는 베스트 청원임.
+    private String boardIdx;                // 게시판 순서
+    private String category;                // 게시판 종류
+    private String title;                   // 게시판 제목
+    private String author;                  // 저자
+    private String term;                    // 청원 기간
+    private String numberOfJoinPeople;      // 청원에 참여한 인원
+    private String link;                    // 게시판 링크
 
     String thumbnailContent;
 
     public BoardData(){
-        boardIdx="";
-        this.boardTag ="";
-        this.numberOfContent ="";
-        this.category="";
-        this.title="";
-        this.author="";
-        this. term="";
-        this. numberOfJoinPeople="";
-        this. link="";
-        this.thumbnailContent="";
+        this.boardIdx               = "";
+        this.boardTag               = "";
+        this.numberOfContent        = "";
+        this.category               = "";
+        this.title                  = "";
+        this.author                 = "";
+        this. term                  = "";
+        this. numberOfJoinPeople    = "";
+        this.link                   = "";
+        this.thumbnailContent       = "";
     }
     protected BoardData(Parcel in) {
-        boardTag = in.readString();
-        numberOfContent = in.readString();
-        boardIdx = in.readString();
-        category = in.readString();
-        title = in.readString();
-        author = in.readString();
-        term = in.readString();
-        numberOfJoinPeople = in.readString();
-        link = in.readString();
-        thumbnailContent = in.readString();
+        boardTag            = in.readString();
+        numberOfContent     = in.readString();
+        boardIdx            = in.readString();
+        category            = in.readString();
+        title               = in.readString();
+        author              = in.readString();
+        term                = in.readString();
+        numberOfJoinPeople  = in.readString();
+        link                = in.readString();
+        thumbnailContent    = in.readString();
     }
 
     public static final Creator<BoardData> CREATOR = new Creator<BoardData>() {

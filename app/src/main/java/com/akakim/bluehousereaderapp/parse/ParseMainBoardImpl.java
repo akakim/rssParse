@@ -1,5 +1,6 @@
 package com.akakim.bluehousereaderapp.parse;
 
+import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -17,6 +18,9 @@ import java.util.Map;
  * @version 0.0.1
  * @date 2017-12-23
  * @since 0.0.1
+ *
+ * 실제로 파싱을하는 구현체.
+ * 만약, Thread가 아닌 별도의 작업
  */
 
 public class ParseMainBoardImpl implements ParseMainBoardInteractor {
@@ -31,25 +35,25 @@ public class ParseMainBoardImpl implements ParseMainBoardInteractor {
 
     }
 
-    @Override
-    public void loadBoard(@BoardDefinition int boardKind) {
-
-        Thread t;
-        switch (boardKind){
-            case ParseMainBoardInteractor.BLUE_HOUSE_INIT_BOARD:
-                t = new Thread( new BlueHouseTask(onFinishedListener) );
-                t.start();
-                break;
-            case ParseMainBoardInteractor.BLUE_HOUSE_RECOMAND_MAIN:
-                t = new Thread( new BlueHouseTask(onFinishedListener) );
-                t.start();
-                break;
-        }
-    }
-
+    /**
+     * issue : Thread의 run 과 start는 다른 것이므로 start로 처리를한다.
+     * 기본적인 안드로이드의 조건이다. 메인스레드에서 네트워크 작업은 하지 않는다.
+     * 백그라운드에서 돌린다.
+     * @param url
+     */
     @Override
     public void loadBoard(String url) {
         new Thread( new BlueHouseTask( url, onFinishedListener )).start();
+    }
+
+    @Override
+    public void loadBoard(Uri uri) {
+        new Thread( new BlueHouseTask( uri , onFinishedListener )).start();
+    }
+
+    @Override
+    public void loadNextPage(int specificPageNumber) {
+
     }
 
     @Override
@@ -72,8 +76,4 @@ public class ParseMainBoardImpl implements ParseMainBoardInteractor {
 
     }
 
-    @Override
-    public void initFragment(Fragment fragment) {
-
-    }
 }

@@ -1,5 +1,6 @@
 package com.akakim.bluehousereaderapp.parse.parsetask;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -28,30 +29,32 @@ import kotlin.coroutines.experimental.CoroutineContext;
 
 public class BlueHouseTask implements Runnable  {
 
-
-    String url = "";
+    Uri uri;
     ParseMainBoardInteractor.OnFinishedListener onFinishedListener  ;
 
-    public BlueHouseTask(ParseMainBoardInteractor.OnFinishedListener onFinishedListener) {
-        this ( Constants.PUBLIC_OPINION_BASE_URL,onFinishedListener );
-    }
 
     public BlueHouseTask(String url, ParseMainBoardInteractor.OnFinishedListener onFinishedListener) {
-        this.url = url;
+
+        this.uri =  Uri.parse( url );
+        this.onFinishedListener = onFinishedListener;
+    }
+
+    public BlueHouseTask (Uri uri, ParseMainBoardInteractor.OnFinishedListener onFinishedListener ){
+        this.uri = uri ;
         this.onFinishedListener = onFinishedListener;
     }
 
     @Override
     public void run() {
-        boolean isBestBoardExist = false;
-        boolean isReadyAnswerExist = false;
-        final StringBuilder builder = new StringBuilder();
+        boolean isBestBoardExist        = false;
+        boolean isReadyAnswerExist      = false;
+        final StringBuilder builder         = new StringBuilder();
 
         final Bundle bundles = new Bundle();
         ArrayList<BoardData> boardDataArrayList = new ArrayList<BoardData>();
         try{
 
-            Connection connection = Jsoup.connect(url);
+            Connection connection = Jsoup.connect( uri.toString());
             connection.timeout(6000);
             Document doc = connection.get();
             Elements classDivs = doc.select("div[class]");
@@ -106,8 +109,7 @@ public class BlueHouseTask implements Runnable  {
 //                            Log.d(getClass().getSimpleName(),ele.text());
                             break;
                         }else if("청원 목록".equals( ele.select("h4").text())){
-//                            Log.d(getClass().getSimpleName(),"청원목록  ");
-//                            Log.d(getClass().getSimpleName(),ele.text());
+
 
                             Elements ulTag = ele.select("ul");
 
@@ -115,21 +117,12 @@ public class BlueHouseTask implements Runnable  {
                             BoardData boardData;
                             for( Element e : liTags){
 
-//                                Log.d("getElementTAg,",e.text());
                                 Elements wrap_ele = e.select("div[class]");
-
-//                                Elements links = wrap_ele.select("a[href]");
-
-//                                Log.d( "links TAg ",links.text() );
 
                                 boardData = new BoardData();
                                 boardData.setBoardTag( BoardData.NORMAL_BOARD_TAG );
 
                                 for( Element divItem : wrap_ele){
-
-
-//                                    Log.d("getClassName",divItem.className());
-//                                    Log.d("getText()",divItem.text());
 
                                         if( divItem.hasClass("bl_no")){
                                             boardData.setNumberOfContent(  divItem.text() );
@@ -147,12 +140,11 @@ public class BlueHouseTask implements Runnable  {
                                         }else if ( divItem.hasClass("bl_agree  cb ")){
                                             boardData.setNumberOfJoinPeople(  divItem.text() );
                                         }
-//                                    Log.d( "element TAg ",divItem.text() );
 
                                 }
 
                                 boardDataArrayList.add(boardData);
-//                                Log.d("tag,",boardData.toString());
+
 
 
                             }
@@ -162,7 +154,6 @@ public class BlueHouseTask implements Runnable  {
                         }
                         break;
                     default:
-//                        Log.e(getClass().getSimpleName(),"알 수 없는 에러 발생 in default switch");
                         break;
                 }
             }

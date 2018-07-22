@@ -67,7 +67,7 @@ public class BlueHouseFragment extends Fragment implements MainBoardCallback,Boa
         return fragment;
     }
 
-    @Override`
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
@@ -160,26 +160,13 @@ public class BlueHouseFragment extends Fragment implements MainBoardCallback,Boa
                 case BoardData.NORMAL_BOARD_TAG:
                     boardDataArrayList.add( item );
                     break;
+                case BoardData.BEST_BOARD_TAG:
+                    boardDataArrayList.add(item );
+                    break;
                 default:
                     break;
             }
         }
-//
-//        int maxHeight= 0;
-//        for (int k = 0; k< boardDataArrayList.size();k++){
-//
-//
-//
-//            View view =  boardList.getLayoutManager().getChildAt(k);
-//            int height =  view.getMeasuredHeight();
-//
-//            int top = view.getPaddingTop();
-//            int bottom = view.getPaddingBottom();
-//
-//
-//            maxHeight += maxHeight + ( height + top + bottom );
-////            boardList.
-//        }
 
         ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams( boardList.getLayoutParams() ) ;
 

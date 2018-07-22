@@ -28,6 +28,7 @@ import com.akakim.bluehousereaderapp.data.BoardData;
 import com.akakim.bluehousereaderapp.data.Constants;
 import com.akakim.bluehousereaderapp.data.FeedData;
 import com.akakim.bluehousereaderapp.ui.MainBoardCallback;
+import com.akakim.bluehousereaderapp.ui.MainBoardPresenter;
 import com.akakim.bluehousereaderapp.ui.MainBoardPresenterImpl;
 import com.akakim.bluehousereaderapp.ui.activity.BaseActivity;
 import com.akakim.bluehousereaderapp.ui.activity.BlueHouseContentActivity;
@@ -42,14 +43,14 @@ import butterknife.OnClick;
 
 public class MainJavaActivity extends BaseActivity implements MainBoardCallback, NavigationView.OnNavigationItemSelectedListener {
 
-    @BindView(R.id.drawerLayout)
-    DrawerLayout drawerLayout;
+//    @BindView(R.id.drawerLayout)
+//    DrawerLayout drawerLayout;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
-    @BindView(R.id.navigationView)
-    NavigationView navigationView;
+//    @BindView(R.id.navigationView)
+//    NavigationView navigationView;
 
     MainBoardPresenterImpl mainBoardCallback;
 
@@ -58,8 +59,8 @@ public class MainJavaActivity extends BaseActivity implements MainBoardCallback,
     @BindView( R.id.rvBoardList)
     RecyclerView rvBoardList;
 
-    @BindView(R.id.tvErrorMessage)
-    TextView tvErrorMessage;
+//    @BindView(R.id.tvErrorMessage)
+//    TextView tvErrorMessage;
 
 
     FeedListAdapter feedListAdapter;
@@ -74,27 +75,12 @@ public class MainJavaActivity extends BaseActivity implements MainBoardCallback,
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this,drawerLayout,toolbar,
-                R.string.main_navigation_drawer_open,
-                R.string.main_navigation_drawer_close
-        );
 
 
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
-
-        navigationView.setNavigationItemSelectedListener(this);
-
-//        mainBoardCallback = new MainBoardPresenterImpl(this , this);
-
-
-
-//        rvBoardList.setLayoutManager( new LinearLayoutManager(this));
-
-
-        feedData.add( new FeedData( "청와대 뉴스피드 ", Constants.PUBLIC_OPINION_BASE_URL , BlueHouseContentActivity.BLUE_HOUSE_BASIC_TYPE, BlueHouseContentActivity.class ) );
-        feedData.add( new FeedData( "청와대 뉴스피드 (추천순)", Constants.PUBLIC_OPINION_BASE_URL , BlueHouseContentActivity.BLUE_HOUSE_POPPULAR_TYPE , BlueHouseContentActivity.class ) );
+        feedData.add( new FeedData( "청와대 뉴스피드 ", MainBoardPresenter.BLUE_HOUSE_BASIC_TYPE, BlueHouseContentActivity.class ) );
+        feedData.add( new FeedData( "청와대 뉴스피드 (추천순)",MainBoardPresenter.BLUE_HOUSE_POPPULAR_TYPE ,BlueHouseContentActivity.class ) );
+        feedData.add( new FeedData( "청와대 뉴스피드 (분야별 청원)",MainBoardPresenter.BLUE_HOUSE_CATEGORY_TYPE ,BlueHouseContentActivity.class ) );
+//        feedData.add( new FeedData( "청와대 뉴스피드 (답변된 청원)",MainBoardPresenter.BLUE_HOUSE_ANSWER_TYPE ,BlueHouseContentActivity.class ) );
 
         feedListAdapter = new FeedListAdapter(feedData,this);
 
@@ -136,7 +122,7 @@ public class MainJavaActivity extends BaseActivity implements MainBoardCallback,
                 Log.d("onResponseTimeOutFailed",result);
             }
         }
-//        Toast.makeText(this,result,Toast.LENGTH_SHORT).show();
+
     }
 
 //   .
@@ -162,21 +148,18 @@ public class MainJavaActivity extends BaseActivity implements MainBoardCallback,
 
     }
 
-    @OnClick(R.id.btnTest)
-    public void testActivity(){
-
-        Intent i = new Intent(this, BlueHouseContentActivity.class);
-        i.putExtra( "action",BlueHouseContentActivity.INIT_BOARD );
-        startActivity( i );
-    }
+//    @OnClick(R.id.btnTest)
+//    public void testActivity(){
+//
+//        Intent i = new Intent(this, BlueHouseContentActivity.class);
+////        i.putExtra( "action",BlueHouseContentActivity.INIT_BOARD );
+//        startActivity( i );
+//    }
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-        drawerLayout.closeDrawer(GravityCompat.START);
+//        drawerLayout.closeDrawer(GravityCompat.START);
         return false;
     }
 
-    @OnClick(R.id.tvErrorMessage)
-    public void refreshBoard(){
-    }
 }

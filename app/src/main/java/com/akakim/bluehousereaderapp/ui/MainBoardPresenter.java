@@ -1,5 +1,7 @@
 package com.akakim.bluehousereaderapp.ui;
 
+import android.net.Uri;
+
 import com.akakim.bluehousereaderapp.parse.ParseMainBoardInteractor;
 
 /**
@@ -10,7 +12,16 @@ import com.akakim.bluehousereaderapp.parse.ParseMainBoardInteractor;
  */
 
 public interface MainBoardPresenter {
-    void initContent();
-    void initContent(@ParseMainBoardInteractor.BoardDefinition int def);
-    void initContent(String url);
+
+    String BLUE_HOUSE_BASIC_TYPE     = "blueHouseBasic";
+    String BLUE_HOUSE_POPPULAR_TYPE  = "blueHousePop";
+    String BLUE_HOUSE_CATEGORY_TYPE  = "blueHouseCate";
+    String BLUE_HOUSE_ANSWER_TYPE    = "blueHouseAnswer";
+    void initContent(String type);
+    void updateConent( String type);
+
+//    void initContent(String url);
+//    void initContent(Uri uri );
+//    void loadMoreContent ( Uri uri );
+//
 }

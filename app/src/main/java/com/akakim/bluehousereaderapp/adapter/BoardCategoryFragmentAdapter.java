@@ -11,6 +11,8 @@ import java.util.List;
  * Created by RyoRyeong Kim on 2018-01-05.
  */
 
+
+@Deprecated
 public class BoardCategoryFragmentAdapter  extends FragmentStatePagerAdapter {
 
     List<Fragment> fragmentList = new ArrayList<>();

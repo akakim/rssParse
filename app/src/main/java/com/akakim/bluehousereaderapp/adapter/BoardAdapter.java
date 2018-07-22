@@ -25,14 +25,28 @@ import butterknife.ButterKnife;
 public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.BoardViewHolder> {
 
 
-    Context context;
-    ArrayList<BoardData> boardDataItems;
-    OnListFragmentInteractionListener listener;
+    private Context                             context;
+    private ArrayList<BoardData>                boardDataItems;
+    private OnListFragmentInteractionListener   listener;
+    private OnListItemClickListener             onListItemClickListener;
 
+
+    public BoardAdapter( Context context, ArrayList<BoardData> boardDataItems  ){
+        this( context,boardDataItems,null);
+    }
     public BoardAdapter(Context context, ArrayList<BoardData> boardDataItems , OnListFragmentInteractionListener listener) {
-        this.context = context;
+        this.context        = context;
         this.boardDataItems = boardDataItems;
+        this.listener       = listener;
+    }
+
+
+    public void setListener(OnListFragmentInteractionListener listener) {
         this.listener = listener;
+    }
+
+    public void setOnListItemClickListener(OnListItemClickListener onListItemClickListener) {
+        this.onListItemClickListener = onListItemClickListener;
     }
 
     @Override
@@ -41,7 +55,7 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.BoardViewHol
     }
 
     @Override
-    public void onBindViewHolder(BoardViewHolder holder, int position) {
+    public void onBindViewHolder(BoardViewHolder holder, final int position) {
 
         final BoardData item = boardDataItems.get(position);
 
@@ -50,12 +64,17 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.BoardViewHol
                 listener.onListFragmentInteraction( item );
             }
 
+            if(onListItemClickListener != null){
+                onListItemClickListener.onListItemClickListener(position,item);
+            }
+
          });
         holder.tvBoardIdx.setText( item.getBoardIdx() );
         holder.tvCategory.setText( item.getCategory() );
         holder.tvNumberOfJoinedPeople.setText( item.getNumberOfJoinPeople() );
         holder.tvBoardTerm.setText( item.getTerm());
         holder.tvTitle.setText( item.getTitle() )  ;
+
     }
 
     @Override
@@ -66,21 +85,20 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.BoardViewHol
     public class BoardViewHolder extends RecyclerView.ViewHolder{
 
         @BindView(R.id.tvBoardIdx)
-        public TextView tvBoardIdx;
+        TextView tvBoardIdx;
 
         @BindView(R.id.tvCategory)
-        public TextView tvCategory;
+        TextView tvCategory;
 
 
         @BindView(R.id.tvTitle)
-        public TextView tvTitle;
-
+        TextView tvTitle;
 
         @BindView(R.id.tvBoardTerm)
-        public TextView tvBoardTerm;
+        TextView tvBoardTerm;
 
         @BindView(R.id.tvNumberOfJoinedPeople)
-        public TextView tvNumberOfJoinedPeople;
+        TextView tvNumberOfJoinedPeople;
 
 
         public BoardViewHolder(View itemView) {
@@ -94,5 +112,9 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.BoardViewHol
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
         void onListFragmentInteraction(BoardData item);
+    }
+
+    public interface OnListItemClickListener{
+        void onListItemClickListener(int position ,BoardData item);
     }
 }
