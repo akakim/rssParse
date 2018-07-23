@@ -84,14 +84,21 @@ public class MainBoardPresenterImpl implements MainBoardPresenter,ParseMainBoard
         }
         basicBuilder = builder;
 
+        Log.d(getClass().getSimpleName(),"getURL " + builder.build());
         parseMainBoard.loadBoard( builder.build());
 
 
     }
 
     @Override
-    public void updateConent(@NonNull String type) {
+    public void updateContent( String type,String parameter, int page) {
 
+        Uri.Builder updateBuilder = basicBuilder;
+
+
+        updateBuilder.appendQueryParameter(parameter,String.valueOf( page));
+
+        parseMainBoard.loadNextPage( updateBuilder.build() );
         //TODO :
         switch (type){
             case BLUE_HOUSE_BASIC_TYPE:

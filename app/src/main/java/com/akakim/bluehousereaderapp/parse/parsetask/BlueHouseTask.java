@@ -104,11 +104,14 @@ public class BlueHouseTask implements Runnable  {
                         break;
                     case "board text":
 
+                        Log.d(getClass().getSimpleName(),ele.select("h4").text());
                         if("답변 대기 중인 청원".equals( ele.select("h4").text())) {
 //                            Log.d(getClass().getSimpleName(),"답변 대기 중은 결정안됨 ");
 //                            Log.d(getClass().getSimpleName(),ele.text());
                             break;
-                        }else if("청원 목록".equals( ele.select("h4").text())){
+                        }else if("청원 목록".equals( ele.select("h4").text())
+                                   ||"최다 추천 청원 목록".equals( ele.select("h4").text())
+                                   ||"목록".contains( ele.select("h4").text())){
 
 
                             Elements ulTag = ele.select("ul");
@@ -124,6 +127,7 @@ public class BlueHouseTask implements Runnable  {
 
                                 for( Element divItem : wrap_ele){
 
+//                                    divItem.
                                         if( divItem.hasClass("bl_no")){
                                             boardData.setNumberOfContent(  divItem.text() );
                                         }else if ( divItem.hasClass("bl_category cs") ){
@@ -159,9 +163,9 @@ public class BlueHouseTask implements Runnable  {
             }
 
 
-            for ( BoardData data : boardDataArrayList){
-                Log.d(getClass().getSimpleName(),data.toString());
-            }
+//            for ( BoardData data : boardDataArrayList){
+//                Log.d(getClass().getSimpleName(),data.toString());
+//            }
             bundles.putBoolean(BoardData.BEST_BOARD_TAG,isBestBoardExist );
             bundles.putBoolean(BoardData.READY_ANSWER_BOARD_TAG,isReadyAnswerExist );
             bundles.putParcelableArrayList(BoardData.BOARD_ITEMS_KEY,boardDataArrayList);

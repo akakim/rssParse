@@ -1,5 +1,6 @@
 package com.akakim.bluehousereaderapp.ui;
 
+import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
 
 import com.akakim.bluehousereaderapp.adapter.FloodingAdapter;
@@ -17,7 +18,7 @@ import java.util.ArrayList;
 
 public class FloodingPresenter extends RecyclerView.OnScrollListener {
 
-    private boolean         isMoreLoading = false;
+    private boolean         isMoreLoading = true;
 
 
     private RecyclerView    recyclerView;
@@ -31,6 +32,9 @@ public class FloodingPresenter extends RecyclerView.OnScrollListener {
 
     private int visibleThreshold = 1;
 
+
+    private Handler handler;
+    private int currentPage;
 
     public FloodingPresenter(RecyclerView recyclerView, ArrayList<? extends BoardData> viewData , LoadListener loadListener ) {
 
@@ -54,8 +58,8 @@ public class FloodingPresenter extends RecyclerView.OnScrollListener {
         recyclerView.setAdapter( adapter );
         recyclerView.addOnScrollListener( this );
 
-
-
+        handler = new Handler();
+        currentPage = 1;
     }
 
 
@@ -65,6 +69,17 @@ public class FloodingPresenter extends RecyclerView.OnScrollListener {
 
     public void setMoreLoading(boolean moreLoading) {
         isMoreLoading = moreLoading;
+    }
+
+
+    public boolean isProgressing(){
+        return adapter.isLoading();
+    }
+
+    public void removeProgress(){
+
+        adapter.removeDummyProgressView();
+//        adapter.notifyItemRemoved( adapter.getItemCount() -1  );
     }
 
     @Override
@@ -90,17 +105,23 @@ public class FloodingPresenter extends RecyclerView.OnScrollListener {
             lastVisibleItem     = layoutManager.findLastVisibleItemPosition();
 
 
-            if( !isMoreLoading &&
+            if( isMoreLoading &&
                     (totalItemCount - visibleItemCount ) <= (firstVisibleItem + visibleThreshold)) {
-                    isMoreLoading = true;
+                    isMoreLoading = false;
 
                     if( loadListener != null ){
 
 //                        recyclerView.post()
 //                        adapter
 
-                        adapter.addDummyProgressView();
-                        loadListener.onLoad();
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                adapter.addDummyProgressView();
+                            }
+                        });
+
+                        loadListener.onLoad("page",currentPage + 1 );
                     }
 
             }
@@ -109,9 +130,25 @@ public class FloodingPresenter extends RecyclerView.OnScrollListener {
         }
     }
 
+    public int getCurrentPage() {
+        return currentPage;
+    }
+
+    public void setCurrentPage(int currentPage) {
+        this.currentPage = currentPage;
+    }
+
+    public void updateCurrentPage(){
+        this.currentPage++;
+    }
+
+    public void notifyDataSetChanged(){
+        adapter.notifyDataSetChanged();
+    }
+
     public interface LoadListener {
 
 
-        void onLoad();
+        void onLoad(String parameter, int nextPage);
     }
 }

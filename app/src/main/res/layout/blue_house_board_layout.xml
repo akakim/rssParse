@@ -16,14 +16,12 @@
 
         <TextView
             android:id="@+id/tvBoardIdx"
+            style="@style/TextTitleBlackTheme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
-            tools:text="754444"
-
-            android:layout_alignParentTop="true"
             android:layout_alignParentStart="true"
-            style="@style/TextTitleBlackTheme"/>
+            android:layout_alignParentTop="true"
+            tools:text="754444" />
 
         <TextView
             android:id="@+id/tvCategory"
@@ -32,7 +30,6 @@
             android:gravity="right"
             android:layout_alignParentRight="true"
             android:layout_toRightOf="@id/tvBoardIdx"
-
             tools:text="인권/성평등"
             style="@style/TextLightBlueTheme"/>
 
@@ -44,11 +41,23 @@
             style="@style/TextBlackTheme"
             tools:text="글제목 청와대 청원게시판도 RSS를 해달라 fuck!" />
 
+
+        <TextView
+            android:id="@+id/tvThumbnailContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvTitle"
+            style="@style/TextBlackTheme"
+            tools:text="글제목 청와대 청원게시판도 RSS를 해달라 fuck!\nkkslsk kisk"
+            android:visibility="gone"
+            />
+
+
         <TextView
             android:id="@+id/tvBoardTerm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tvTitle"
+            android:layout_below="@id/tvThumbnailContent"
             style="@style/TextBlackTheme"
             tools:text="12.07.01 ~ 12.08.09"/>
 
@@ -57,7 +66,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="right"
-            android:layout_below="@id/tvTitle"
+            android:layout_below="@id/tvThumbnailContent"
             android:layout_alignParentRight="true"
             android:layout_toRightOf="@id/tvBoardTerm"
 

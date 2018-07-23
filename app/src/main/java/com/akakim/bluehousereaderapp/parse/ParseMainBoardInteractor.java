@@ -27,7 +27,7 @@ public interface ParseMainBoardInteractor {
     void init();
     void loadBoard(String url);
     void loadBoard(Uri uri);
-    void loadNextPage(int specificPageNumber);
+    void loadNextPage(Uri uri);
     void loadBoard(String url,Map<String,String> getParameter);
 
 }

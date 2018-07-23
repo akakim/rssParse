@@ -32,6 +32,7 @@ public class CustomProgressDialog extends Dialog {
 
         setContentView( R.layout.layout_custom_dialog);
 
+
         ButterKnife.bind( this );
     }
 

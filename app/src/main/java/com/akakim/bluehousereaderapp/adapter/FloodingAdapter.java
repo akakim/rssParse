@@ -36,7 +36,7 @@ public class FloodingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         if( viewType == 0){
 
-            return new ProgressViewHolder(LayoutInflater.from( context ).inflate(R.layout.item_progress,null));
+            return new ProgressViewHolder(LayoutInflater.from( context ).inflate(R.layout.item_progress,parent,false));
         }else {
 
             return new BoardViewHolder( LayoutInflater.from(context).inflate(R.layout.blue_house_board_layout,parent,false) );
@@ -61,12 +61,12 @@ public class FloodingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 //                }
 
             });
-            viewHolder.tvBoardIdx.setText( item.getBoardIdx() );
+
+            viewHolder.tvBoardIdx.setText( item.getNumberOfContent() );
             viewHolder.tvCategory.setText( item.getCategory() );
             viewHolder.tvNumberOfJoinedPeople.setText( item.getNumberOfJoinPeople() );
             viewHolder.tvBoardTerm.setText( item.getTerm());
-            viewHolder.tvTitle.setText( item.getTitle() )  ;
-
+            viewHolder.tvTitle.setText( item.getThumbnailContent() )  ;
 
         }
     }
@@ -78,7 +78,22 @@ public class FloodingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         notifyItemInserted( boardDataItems.size() -1 );
     }
 
+    public void removeDummyProgressView(){
+        if( boardDataItems.size() > 0 ){
 
+            int idx = boardDataItems.size() -1 ;
+            boardDataItems.remove( idx );
+            notifyItemRemoved( idx );
+        }
+    }
+    public boolean isLoading(){
+
+//        if ( boardDataItems.get( boardDataItems.size() ) == null ) true : false
+
+        if( boardDataItems.size() == 0 )  return false;
+
+        return boardDataItems.get( boardDataItems.size() -1 ) == null;
+    }
     @Override
     public int getItemCount() {
         return boardDataItems.size();

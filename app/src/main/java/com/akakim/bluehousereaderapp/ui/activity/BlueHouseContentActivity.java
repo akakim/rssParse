@@ -72,6 +72,9 @@ public class BlueHouseContentActivity extends BaseActivity
     @BindView( R.id.rvBoardList)
     RecyclerView rvBoardList;
 
+    FloodingPresenter presenter;
+
+    ArrayList<BoardData> filteredBoardItem = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,7 +100,7 @@ public class BlueHouseContentActivity extends BaseActivity
 
 
         mainBoardCallback.initContent( type );
-
+        presenter = new FloodingPresenter(rvBoardList,filteredBoardItem,this);
 
 
         // Legacy
@@ -149,7 +152,12 @@ public class BlueHouseContentActivity extends BaseActivity
     public void responseFailed(String result) {
 
         progressDialog.dismiss();
+        if( presenter.isProgressing() ){
+            presenter.removeProgress();
+        }
 
+
+        Log.e(getClass().getSimpleName(),"response is failed... ");
         if( result != null){
             if( "timeout".contains(result)){
                 Log.d("onResponseTimeOutFailed",result);
@@ -162,42 +170,50 @@ public class BlueHouseContentActivity extends BaseActivity
     public void responseSuccess(@NonNull Bundle boardData) {
         progressDialog.dismiss();
 
+        if( presenter.isProgressing() ){
+            presenter.removeProgress();
+        }
+
+        presenter.setMoreLoading( true );
+
         ArrayList<BoardData> boardItems = boardData.getParcelableArrayList( BoardData.BOARD_ITEMS_KEY );
 
-        Boolean isBestBoardShow = boardData.getBoolean( BoardData.BEST_BOARD_TAG );
-        Boolean isAnswerBoardShow = boardData.getBoolean( BoardData.READY_ANSWER_BOARD_TAG);
-
-        BoardAdapter adapter = new BoardAdapter(this, boardItems );
-
-        adapter.setOnListItemClickListener( this );
-        rvBoardList.setLayoutManager(new LinearLayoutManager(this));
-        rvBoardList.setAdapter( adapter );
+        Boolean isBestBoardShow     = boardData.getBoolean( BoardData.BEST_BOARD_TAG );
+        Boolean isAnswerBoardShow   = boardData.getBoolean( BoardData.READY_ANSWER_BOARD_TAG);
 
 
-//        for(BoardData item : boardItems){
-//            Log.d(getClass().getSimpleName()," boardItems " + boardItems.toString());
-//            switch ( item.getBoardTag() ){
-//
-//                case BoardData.BEST_BOARD_TAG:
+
+
+        // filter
+        for(BoardData item : boardItems){
+            switch ( item.getBoardTag() ){
+
+                case BoardData.BEST_BOARD_TAG:
 //                    bestOpinionList.get(0).setText( item.getTitle() );
 //                    bestOpinionList.get(1).setText( item.getThumbnailContent() );
 //                    bestOpinionList.get(2).setText( "청원인 : " + item.getAuthor() );
 //                    bestOpinionList.get(3).setText( "신청인 : " + item.getNumberOfJoinPeople() );
 //                    bestOpinionList.get(4).setText( "청원기간 : " + item.getTerm() );
-//
 //                    bestLink = Uri.parse( item.getLink() );
-//                    break;
-//                case BoardData.READY_ANSWER_BOARD_TAG:
-//                    break;
-//                case BoardData.NORMAL_BOARD_TAG:
-//                    boardDataArrayList.add( item );
-//                    break;
-//                default:
-//                    break;
-//            }
-//        }
+                    break;
+                case BoardData.READY_ANSWER_BOARD_TAG:
+                    break;
+                case BoardData.NORMAL_BOARD_TAG:
+                    filteredBoardItem.add( item );
 
+                    break;
+                default:
+                    break;
+            }
+        }
 
+        presenter.notifyDataSetChanged();
+
+//        BoardAdapter adapter = new BoardAdapter(this, filteredBoardItem );
+//
+//        adapter.setOnListItemClickListener( this );
+//        rvBoardList.setLayoutManager(new LinearLayoutManager(this));
+//        rvBoardList.setAdapter( adapter );
 
     }
 
@@ -234,8 +250,13 @@ public class BlueHouseContentActivity extends BaseActivity
 //        Toast.makeText( this ,"getView Id : " + v.getId(),Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * 서버로 다음 페이지를 요청한다.
+     * @param paramter
+     * @param nextPage
+     */
     @Override
-    public void onLoad() {
-
+    public void onLoad(String paramter,int nextPage) {
+        mainBoardCallback.updateContent(type,"page", nextPage);
     }
 }

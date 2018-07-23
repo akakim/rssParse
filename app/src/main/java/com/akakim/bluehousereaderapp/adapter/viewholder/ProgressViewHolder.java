@@ -2,7 +2,9 @@ package com.akakim.bluehousereaderapp.adapter.viewholder;
 
 import android.support.v7.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.akakim.bluehousereaderapp.R;
@@ -26,5 +28,11 @@ public class ProgressViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
 
         ButterKnife.bind(this,itemView);
+
+//        Log.d( "ProgressViewHolder" , )
+//        itemView.getAccessibilityClassName()
+//        ViewGroup.LayoutParams params = itemView.getLayoutParams();
+
+
     }
 }

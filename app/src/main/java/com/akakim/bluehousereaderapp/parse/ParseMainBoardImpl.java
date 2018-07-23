@@ -52,8 +52,8 @@ public class ParseMainBoardImpl implements ParseMainBoardInteractor {
     }
 
     @Override
-    public void loadNextPage(int specificPageNumber) {
-
+    public void loadNextPage( Uri uri ) {
+        new Thread( new BlueHouseTask( uri , onFinishedListener )).start();
     }
 
     @Override

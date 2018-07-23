@@ -2,6 +2,7 @@ package com.akakim.bluehousereaderapp.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,12 +70,14 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.BoardViewHol
             }
 
          });
-        holder.tvBoardIdx.setText( item.getBoardIdx() );
+        holder.tvBoardIdx.setText( item.getNumberOfContent() );
         holder.tvCategory.setText( item.getCategory() );
         holder.tvNumberOfJoinedPeople.setText( item.getNumberOfJoinPeople() );
         holder.tvBoardTerm.setText( item.getTerm());
-        holder.tvTitle.setText( item.getTitle() )  ;
+        holder.tvTitle.setText( item.getThumbnailContent() )  ;
+//        holder.tvThumbnailContent.setText( item.getThumbnailContent() )  ;
 
+        Log.d( getClass().getSimpleName(),item.toString());
     }
 
     @Override
@@ -93,6 +96,9 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.BoardViewHol
 
         @BindView(R.id.tvTitle)
         TextView tvTitle;
+
+//        @BindView(R.id.tvThumbnailContent)
+//        TextView tvThumbnailContent;
 
         @BindView(R.id.tvBoardTerm)
         TextView tvBoardTerm;

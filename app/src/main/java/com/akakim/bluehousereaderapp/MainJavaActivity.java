@@ -77,9 +77,9 @@ public class MainJavaActivity extends BaseActivity implements MainBoardCallback,
 
 
 
-        feedData.add( new FeedData( "청와대 뉴스피드 ", MainBoardPresenter.BLUE_HOUSE_BASIC_TYPE, BlueHouseContentActivity.class ) );
-        feedData.add( new FeedData( "청와대 뉴스피드 (추천순)",MainBoardPresenter.BLUE_HOUSE_POPPULAR_TYPE ,BlueHouseContentActivity.class ) );
-        feedData.add( new FeedData( "청와대 뉴스피드 (분야별 청원)",MainBoardPresenter.BLUE_HOUSE_CATEGORY_TYPE ,BlueHouseContentActivity.class ) );
+        feedData.add( new FeedData( "청와대 뉴스피드 ",              MainBoardPresenter.BLUE_HOUSE_BASIC_TYPE,    BlueHouseContentActivity.class ) );
+        feedData.add( new FeedData( "청와대 뉴스피드 (추천순)",      MainBoardPresenter.BLUE_HOUSE_POPPULAR_TYPE ,BlueHouseContentActivity.class ) );
+        feedData.add( new FeedData( "청와대 뉴스피드 (분야별 청원)", MainBoardPresenter.BLUE_HOUSE_CATEGORY_TYPE ,BlueHouseContentActivity.class ) );
 //        feedData.add( new FeedData( "청와대 뉴스피드 (답변된 청원)",MainBoardPresenter.BLUE_HOUSE_ANSWER_TYPE ,BlueHouseContentActivity.class ) );
 
         feedListAdapter = new FeedListAdapter(feedData,this);
@@ -140,7 +140,8 @@ public class MainJavaActivity extends BaseActivity implements MainBoardCallback,
 
     @Override
     public void showMessage(String msg) {
-
+        progressDialog.setContent( msg );
+        progressDialog.show();
     }
 
     @Override
